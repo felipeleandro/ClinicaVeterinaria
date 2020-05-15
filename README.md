@@ -6,9 +6,9 @@ Nesse projeto, iremos desenvolver um sistema para uma clínica veterinária de a
 Seguiremos algumas boas práticas de programação para nosso projeto ficar bonito.
 Para que possamos ter um código bonito e de fácil visualização para todos, peço que sigam essas regras.
 
-1- Em hipótese alguma deve ser utilizado o caractere "_" no nome de classes, propriedades ou métodos.
-2- Os nomes das propriedades devem seguir o modelo de Camel Case, que significa iniciar com uma letra minúscula e apartir de uma palavra diferente colocar uma letra maíuscula. Exemplo : dataInicialConsulta, valorFinalConsulta, nomeVeterinario.
-3- Os nomes dos métodos também devem seguir o modelo de Camel Case que foi explicado na regra 2. Exemplo : consultarExameDoCliente, gravarExameBancoDados.
+- Em hipótese alguma deve ser utilizado o caractere "_" no nome de classes, propriedades ou métodos.
+- Os nomes das propriedades devem seguir o modelo de Camel Case, que significa iniciar com uma letra minúscula e apartir de uma palavra diferente colocar uma letra maíuscula. Exemplo : dataInicialConsulta, valorFinalConsulta, nomeVeterinario.
+- Os nomes dos métodos também devem seguir o modelo de Camel Case que foi explicado na regra 2. Exemplo : consultarExameDoCliente, gravarExameBancoDados.
 
 
 COMANDOS PRINCIPAIS DE GIT QUE SERÃO UTILIZADOS PARA DESENVOLVER
