@@ -12,13 +12,13 @@ Para que possamos ter um código bonito e de fácil visualização para todos, p
 
 
 COMANDOS PRINCIPAIS DE GIT QUE SERÃO UTILIZADOS PARA DESENVOLVER
-- git init (Deve ser utilizado somente uma vez na pasta que você irá realizar o desenvolvimento do nosso projeto)
 - git clone https://github.com/felipeleandro/ClinicaVeterinaria.git (Deve ser utilizado somente uma vez para vincular o projeto do site GitHub com o projeto do seu computador)
-- git pull origin master (Realiza o download de todos os arquivos atualizados do Site GitHub do nosso projeto)
+- git checkout DEV_CODE
+- git pull origin DEV_CODE (Realiza o download de todos os arquivos atualizados do Site GitHub do nosso projeto)
 - git status (Lista todos os arquivos que você alterou alguma coisa)
 - git add . (Adiciona todos os arquivos que você alterou alguma coisa para uma "área" de commit
 - git commit -m "MENSAGEM DO COMMIT" (Realiza o commit de todas as alterações que você realizou com a mensagem explicando qual foi a alteração)
-- git push origin master (Envia o commit das alterações que você realizou para o site GitHub para que os outros possam ver e baixar)
+- git push origin DEV_CODE (Envia o commit das alterações que você realizou para o site GitHub para que os outros possam ver e baixar)
 
 
 Qualquer dúvida que vocês tiverem sobre qualquer coisa, podem me chamar que a gente resolve junto.
