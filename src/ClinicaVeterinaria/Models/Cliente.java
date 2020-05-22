@@ -16,8 +16,7 @@ public class Cliente {
 		listaAnimais = new ArrayList<>();
 	}
 
-	public Cliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli)
-	{
+	public Cliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
 		this.nomCli = nomCli;
 		this.endCli = endCli;
 		this.telCli = telCli;
@@ -25,13 +24,12 @@ public class Cliente {
 		this.emailCli = emailCli;
 		listaAnimais = new ArrayList<>();
 	}
-	
-	public int RegCli() 
-	{
+
+	public int RegCli() {
 		return 0;
 	}
-	public String Concli() 
-	{
+
+	public String Concli() {
 		return null;
 	}
 

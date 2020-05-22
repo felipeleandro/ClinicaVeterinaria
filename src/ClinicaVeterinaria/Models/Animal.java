@@ -3,6 +3,7 @@ package ClinicaVeterinaria.Models;
 import java.util.ArrayList;
 
 public class Animal {
+	private int id; 
     private String nomeAnimal;
     private int idadeAnimal;
     private int sexoAnimal;
@@ -13,8 +14,9 @@ public class Animal {
         listaTratamentos = new ArrayList<>();
     }
 
-    public Animal(String nomeAnimal, int idadeAnimal, int sexoAnimal) {
-        this.nomeAnimal = nomeAnimal;
+    public Animal(String nomeAnimal, int idadeAnimal, int sexoAnimal, int id) {
+        this.id=id;
+    	this.nomeAnimal = nomeAnimal;
         this.idadeAnimal = idadeAnimal;
         this.sexoAnimal = sexoAnimal;
         listaTratamentos = new ArrayList<>();
@@ -60,6 +62,14 @@ public class Animal {
         this.sexoAnimal = sexoAnimal;
     }
 
+    public int getId() {
+    	return id;
+    }
+    
+    public void setId(int id) {
+    	this.id=id;
+    }
+    
     private String ViaAnimal()
     {
         return null;
