@@ -21,8 +21,8 @@ public class AnimalDAO extends Observable {
 		return instance;
 	}
 
-	public void addAnimal(String nome, int anoNasc, int sexo, Especie especie, int id) {
-		Animal animal = new Animal(nome, anoNasc, sexo, especie, id);
+	public void addAnimal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int id) {
+		Animal animal = new Animal(nomeAnimal, idadeAnimal, sexoAnimal, especie,id);
 		id++;
 		animais.add(animal);
 		setChanged();
@@ -41,4 +41,32 @@ public class AnimalDAO extends Observable {
 		}
 		return null;
 	}
+	
+    public Animal getAnimalByNome(String nomeAnimal) {
+        for (Animal animal : animais) {
+            if (animal.getNomeAnimal() == nomeAnimal) {
+                return animal;
+            }
+        }
+        return null;
+    }
+
+    // Updade
+    public void updateAnimal(Animal animal, String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int id) {
+        int pos = animais.indexOf(animal);
+
+        if (pos > 0) {
+            animal.setNomeAnimal(nomeAnimal);
+            animal.setIdadeAnimal(idadeAnimal);
+            animal.setSexoAnimal(sexoAnimal);
+            animal.setEspecie(especie);
+
+            animais.set(pos, animal);
+        }
+    }
+
+    // Delete
+    public void deleteAnimal(Animal animal) {
+        animais.remove(animal);
+    }
 }
