@@ -11,35 +11,35 @@ import model.Sexo;
 
 public class AnimalDao extends Observable {
 	private static AnimalDao instance;
-	private List<Animal> animal;
+	private List<Animal> animais;
 	private int id;
 
 	private AnimalDao() {
-		animal = new ArrayList();
+		animais = new ArrayList();
 		id = 0;
 	}
 
 	public static AnimalDao getInstance() {
 		if (instance == null) {
-			instance = new AnimalDAO();
+			instance = new AnimalDao();
 		}
 		return instance;
 	}
 
-	public void addAnimal(String nome, int anoNasc, int sexo) {
-		Animal animal = new Animal(nome, anoNasc, sexo);
+	public void addAnimal(String nome, int anoNasc, int sexo,int id) {
+		Animal animal = new Animal(nome, anoNasc, sexo, id);
 		id++;
-		animal.add(animal);
+		animais.add(animal);
 		setChanged();
 		notifyObservers(animal);
 	}
 
 	public List getAllAnimais() {
-		return animal;
+		return animais;
 	}
 
 	public Animal getAnimalById(int id) {
-		for (Animal animal : animal) {
+		for (Animal animal : animais) {
 			if (animal.getId() == id) {
 				return animal;
 			}
