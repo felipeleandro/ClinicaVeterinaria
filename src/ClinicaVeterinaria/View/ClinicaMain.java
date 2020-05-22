@@ -51,7 +51,9 @@ public class ClinicaMain {
 					ListaAnimal();
 					break;
 				case 4:
-					Controller.addAnimal("bixano","2","0",/*especie*/,/*tratamento*/);
+					Especie especie = new Especie();
+					especie.setNomEsp("gato");
+					Controller.addAnimal("bixano","2","0",especie);
 					break;
 			}
 			
