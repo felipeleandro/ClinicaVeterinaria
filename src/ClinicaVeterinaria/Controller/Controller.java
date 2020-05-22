@@ -3,8 +3,7 @@ package Controller;
 import java.util.Observer;
 //import java.util.List;
 import java.util.Map;
-import model.AnimalDao;
-import model.ClienteDAO;
+import ClinicaVeterinaria.Models;
 
 public class Controller {
 	 public static void setObserver(Observer observer){
