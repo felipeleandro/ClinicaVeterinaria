@@ -4,30 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import model.Cliente;
-import model.ClienteDAO;
-import model.Especie;
-import model.Sexo;
-
-public class AnimalDao extends Observable {
-	private static AnimalDao instance;
+public class AnimalDAO extends Observable {
+	private static AnimalDAO instance;
 	private List<Animal> animais;
 	private int id;
 
-	private AnimalDao() {
+	private AnimalDAO() {
 		animais = new ArrayList();
 		id = 0;
 	}
 
-	public static AnimalDao getInstance() {
+	public static AnimalDAO getInstance() {
 		if (instance == null) {
-			instance = new AnimalDao();
+			instance = new AnimalDAO();
 		}
 		return instance;
 	}
 
-	public void addAnimal(String nome, int anoNasc, int sexo,int id) {
-		Animal animal = new Animal(nome, anoNasc, sexo, id);
+	public void addAnimal(String nome, int anoNasc, int sexo, Especie especie, int id) {
+		Animal animal = new Animal(nome, anoNasc, sexo, especie, id);
 		id++;
 		animais.add(animal);
 		setChanged();

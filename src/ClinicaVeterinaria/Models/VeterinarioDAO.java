@@ -1,4 +1,4 @@
-package model;
+package ClinicaVeterinaria.Models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,21 +10,14 @@ public class VeterinarioDAO extends Observable{
     private int id;
     
     private VeterinarioDAO(){
-        Veterinario = new ArrayList();
+        veterinarios = new ArrayList();
         id = 0;
-    }
-    
-    public static ClienteDAO getInstance(){
-       if (instance == null) {
-            instance = new ClienteDAO();
-        }
-        return instance;
     }
     
     public void addVeterinario(String nomVet, String endVet, String telVet){
         Veterinario veterinario = new Veterinario(nomVet, endVet, telVet);
         id++;
-        veterinario.add(veterinario);
+        veterinarios.add(veterinario);
         setChanged();
         notifyObservers(veterinario);
     }
@@ -35,11 +28,33 @@ public class VeterinarioDAO extends Observable{
     
     public Veterinario getVeterinarioById(int id){
         for(Veterinario veterinario : veterinarios){
-            if(veterinario.getId()==id){
+            if(veterinario.getId() == id){
                 return veterinario;
             }
         }
         return null;
+    }
+
+    public Veterinario getVeterinarioByNome(String nome) {
+        for (Veterinario veterinario : veterinarios) {
+            if (veterinario.getNomVet() == nome) {
+                return veterinario;
+            }
+        }
+        return null;
+    }
+
+    // Updade
+    public void updateVeterinario(Veterinario veterinario, String nome, String endereco, String telefone) {
+        int pos = veterinarios.indexOf(veterinario);
+
+        if (pos > 0) {
+            veterinario.setNomVet(nome);
+            veterinario.setEndVet(endereco);
+            veterinario.setTelVet(telefone);
+
+            veterinarios.set(pos, veterinario);
+        }
     }
     
     public void deleteVeterinario(Veterinario veterinario){

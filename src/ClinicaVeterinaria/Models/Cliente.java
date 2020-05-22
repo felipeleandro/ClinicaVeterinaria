@@ -80,4 +80,11 @@ public class Cliente {
 	public void setListaAnimais(ArrayList<Animal> listaAnimais) {
 		this.listaAnimais = listaAnimais;
 	}
+
+	@Override
+	public String toString() {
+		return "Nome: " + nomCli + " " +
+			   "Endereço: " + endCli + " " +
+			   "Telefone: " + telCli + " ";
+	}
 }

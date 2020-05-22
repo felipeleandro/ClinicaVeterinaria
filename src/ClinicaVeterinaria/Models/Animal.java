@@ -14,11 +14,12 @@ public class Animal {
         listaTratamentos = new ArrayList<>();
     }
 
-    public Animal(String nomeAnimal, int idadeAnimal, int sexoAnimal, int id) {
+    public Animal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int id) {
         this.id=id;
     	this.nomeAnimal = nomeAnimal;
         this.idadeAnimal = idadeAnimal;
         this.sexoAnimal = sexoAnimal;
+        this.especie = especie;
         listaTratamentos = new ArrayList<>();
     }
 
@@ -80,4 +81,10 @@ public class Animal {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + nomeAnimal + " "  +
+               "Idade: " + idadeAnimal + " " +
+               "Espécie: " + especie;
+    }
 }

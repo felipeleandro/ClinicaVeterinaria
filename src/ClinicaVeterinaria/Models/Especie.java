@@ -31,4 +31,9 @@ public class Especie {
 	public void setListaAnimais(ArrayList<Animal> listaAnimais) {
 		this.listaAnimais = listaAnimais;
 	}
+
+	@Override
+	public String toString() {
+		return nomEsp;
+	}
 }
