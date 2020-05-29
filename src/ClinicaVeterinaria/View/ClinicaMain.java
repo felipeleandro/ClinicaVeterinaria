@@ -15,13 +15,6 @@ public class ClinicaMain implements Observer {
         System.out.println(arg);
     }
 
-    public void ListaClientes() {
-        List clientes = Controller.getAllClientes();
-        for (Object cliente : clientes) {
-            System.out.println(cliente);
-        }
-    }
-
     public void ListaAnimal() {
         List animais = Controller.getAllAnimais();
         for (Object animal : animais) {
@@ -38,10 +31,9 @@ public class ClinicaMain implements Observer {
         while (escolha != 0) {
             System.out.println("Bem Vindo a clinica como posso ajudar?");
             System.out.println("0 - Sair");
-            System.out.println("1 - Listar Clientes");
-            System.out.println("2 - Inserir Cliente");
-            System.out.println("3 - Listar Animais");
-            System.out.println("4 - Inserir Animal");
+            System.out.println("1 - Inserir Cliente");
+            System.out.println("2 - Inserir Animal");
+            System.out.println("3 - Listar animais pelo ID");
             escolha = in.nextInt();
 
             switch (escolha) {
@@ -49,18 +41,28 @@ public class ClinicaMain implements Observer {
                     return;
 
                 case 1:
-                    ListaClientes();
-                    break;
-                case 2:
                     Controller.addCliente("Cli1", "endereco", "(11)1111-1111", "11111-000", "teste@email.com" );
                     break;
-                case 3:
-                    ListaAnimal();
-                    break;
-                case 4:
+                case 2:
                     Especie especie = new Especie();
                     especie.setNomEsp("gato");
                     Controller.addAnimal(1,"Nome",2,1, especie);
+                    break;
+                case 3:
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Digite um ID: ");
+                    int idCliente = sc.nextInt();
+
+                    List animais = Controller.getAnimalByIdCliente(idCliente);
+
+                    for (Object animal : animais) {
+                        System.out.println(animal);
+                    }
+
+                    sc.close();
+                    break;
+                case 4:
+
                     break;
             }
 

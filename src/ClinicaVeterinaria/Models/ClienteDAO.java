@@ -1,5 +1,9 @@
 package ClinicaVeterinaria.Models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -21,12 +25,28 @@ public class ClienteDAO extends Observable {
         return instance;
     }
 
-    public void addCliente(String nome, String endereco, String telefone, String cep, String email) {
-        Cliente cliente = new Cliente(nome, endereco, telefone, cep, email);
-        id++;
-        clientes.add(cliente);
-        setChanged();
-        notifyObservers(cliente);
+    public void addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+        PreparedStatement statement = null;
+        Connection conn = null;
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement(
+                    "INSERT INTO Clientes(nomCli, endCli, telCli, cepCli, emailCli) VALUES(?,?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, nomCli);
+            statement.setString(2, endCli);
+            statement.setString(3, telCli);
+            statement.setString(4, cepCli);
+            statement.setString(4, emailCli);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DB.closePreparedStatement(statement);
+            DB.closeConnection();
+        }
     }
 
     // RetrieveAll

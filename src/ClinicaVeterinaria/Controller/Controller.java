@@ -27,6 +27,10 @@ public class Controller {
         return AnimalDAO.getInstance().getAllAnimais();
     }
 
+    public static List getAnimalByIdCliente(int idCliente) {
+        return AnimalDAO.getInstance().retrieveById(idCliente);
+    }
+
     public static void addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
         ClienteDAO.getInstance().addCliente(nomCli, endCli, telCli, cepCli, emailCli);
     }
