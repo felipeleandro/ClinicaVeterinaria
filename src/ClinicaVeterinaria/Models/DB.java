@@ -15,8 +15,9 @@ public class DB {
             conn = DriverManager.getConnection(url, user, password);
 
             statement = conn.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS Clientes(idCliente INTEGER PRIMARY KEY, nomCli VARCHAR(100), endCli VARCHAR(100), telCli VARCHAR(100), cepCli VARCHAR(100), emailCli VARCHAR(100))");
-            statement.execute("CREATE TABLE IF NOT EXISTS Animais(idAnimal INTEGER PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal INTEGER, idEspecie INTEGER, idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");
+
+            statement.execute("CREATE TABLE IF NOT EXISTS Clientes(idCliente SERIAL PRIMARY KEY, nomCli VARCHAR(100), endCli VARCHAR(100), telCli VARCHAR(100), cepCli VARCHAR(100), emailCli VARCHAR(100))");
+            statement.execute("CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal INTEGER, idEspecie INTEGER, idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

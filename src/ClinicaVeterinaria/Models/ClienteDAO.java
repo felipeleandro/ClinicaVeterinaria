@@ -37,7 +37,7 @@ public class ClienteDAO extends Observable {
             statement.setString(2, endCli);
             statement.setString(3, telCli);
             statement.setString(4, cepCli);
-            statement.setString(4, emailCli);
+            statement.setString(5, emailCli);
 
             statement.executeUpdate();
 

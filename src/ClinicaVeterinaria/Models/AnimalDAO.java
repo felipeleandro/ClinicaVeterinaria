@@ -35,7 +35,7 @@ public class AnimalDAO extends Observable {
             statement.setInt(2, idadeAnimal);
             statement.setInt(3, sexoAnimal);
             statement.setInt(4, 1);
-            statement.setInt(4, idCliente);
+            statement.setInt(5, idCliente);
 
             statement.executeUpdate();
 
@@ -47,7 +47,7 @@ public class AnimalDAO extends Observable {
         }
     }
 
-    public List<Animal> retrieveById(int idCliente) {
+    public List<Animal> retrieveByIdCliente(int idCliente) {
         List<Animal> result = null;
         ResultSet rs = null;
         Connection conn = null;
@@ -62,7 +62,7 @@ public class AnimalDAO extends Observable {
 
             result = new ArrayList<>();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 result.add(buildObject(rs));
             }
             rs.close();
@@ -119,8 +119,8 @@ public class AnimalDAO extends Observable {
         try {
             Especie especie = new Especie();
             especie.setNomEsp("gato");
-            animal = new Animal(rs.getString("nomeAnimal "),
-                    rs.getInt("idadeAnimal "),
+            animal = new Animal(rs.getString("nomeAnimal"),
+                    rs.getInt("idadeAnimal"),
                     rs.getInt("sexoAnimal"),
                     especie,
                     rs.getInt("idCliente"));

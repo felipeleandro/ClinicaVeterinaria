@@ -19,8 +19,8 @@ public class Controller {
         AnimalDAO.getInstance().addObserver(observer);
     }
 
-    public static void addAnimal(int idAnimal, String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie) {
-        AnimalDAO.getInstance().addAnimal(nomeAnimal, idadeAnimal, sexoAnimal, especie, idAnimal);
+    public static void addAnimal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int idCliente) {
+        AnimalDAO.getInstance().addAnimal(nomeAnimal, idadeAnimal, sexoAnimal, especie, idCliente);
     }
 
     public static List getAllAnimais() {
@@ -28,7 +28,7 @@ public class Controller {
     }
 
     public static List getAnimalByIdCliente(int idCliente) {
-        return AnimalDAO.getInstance().retrieveById(idCliente);
+        return AnimalDAO.getInstance().retrieveByIdCliente(idCliente);
     }
 
     public static void addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {

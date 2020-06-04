@@ -26,14 +26,16 @@ public class ClinicaMain implements Observer {
         Scanner in = new Scanner(System.in);
         Controller.setObserverAnimal(this);
         Controller.setObserverCliente(this);
-        int escolha = 1;
+        int escolha = -1;
 
         while (escolha != 0) {
             System.out.println("Bem Vindo a clinica como posso ajudar?");
             System.out.println("0 - Sair");
             System.out.println("1 - Inserir Cliente");
             System.out.println("2 - Inserir Animal");
-            System.out.println("3 - Listar animais pelo ID");
+            System.out.println("3 - Listar animais pelo ID do Cliente");
+
+            in.reset();
             escolha = in.nextInt();
 
             switch (escolha) {
@@ -46,23 +48,17 @@ public class ClinicaMain implements Observer {
                 case 2:
                     Especie especie = new Especie();
                     especie.setNomEsp("gato");
-                    Controller.addAnimal(1,"Nome",2,1, especie);
+                    Controller.addAnimal("Gatinho",2,1, especie, 1);
                     break;
                 case 3:
-                    Scanner sc = new Scanner(System.in);
                     System.out.println("Digite um ID: ");
-                    int idCliente = sc.nextInt();
+                    int idCliente = in.nextInt();
 
                     List animais = Controller.getAnimalByIdCliente(idCliente);
 
                     for (Object animal : animais) {
                         System.out.println(animal);
                     }
-
-                    sc.close();
-                    break;
-                case 4:
-
                     break;
             }
 
