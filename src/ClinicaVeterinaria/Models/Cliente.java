@@ -5,6 +5,7 @@ import ClinicaVeterinaria.Models.Animal;
 import java.util.ArrayList;
 
 public class Cliente {
+	private int idCli;
 	private String nomCli;
 	private String endCli;
 	private String telCli;
@@ -16,7 +17,8 @@ public class Cliente {
 		listaAnimais = new ArrayList<>();
 	}
 
-	public Cliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+	public Cliente(int idCli,String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+		this.idCli  = idCli;
 		this.nomCli = nomCli;
 		this.endCli = endCli;
 		this.telCli = telCli;
@@ -24,7 +26,15 @@ public class Cliente {
 		this.emailCli = emailCli;
 		listaAnimais = new ArrayList<>();
 	}
-
+	
+	public int getidCli() {
+		return idCli;
+	}
+	
+	public void setidCli(int idCli) {
+		this.idCli = idCli;
+	}
+	
 	public int RegCli() {
 		return 0;
 	}

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import ClinicaVeterinaria.Models.Animal;
 import ClinicaVeterinaria.Models.AnimalDAO;
+import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.ClienteDAO;
 import ClinicaVeterinaria.Models.Especie;
 
@@ -35,8 +36,16 @@ public class Controller {
         ClienteDAO.getInstance().addCliente(nomCli, endCli, telCli, cepCli, emailCli);
     }
 
+    public static List getClienteById(int idCliente) {
+        return AnimalDAO.getInstance().retrieveByIdCliente(idCliente);
+    }
+    
     public static List getAllClientes() {
         return ClienteDAO.getInstance().getAllClientes();
+    }
+    
+   public static void deleteCliente(Cliente cliente) {
+       return;
     }
 
 }

@@ -30,7 +30,7 @@ public class ClinicaVeterinaria {
                     listaClientes();
                     break;
                 case 3:
-                    Controller.deleteCliente(Controller.getClienteById(3));
+                    //Arrumar: Controller.deleteCliente(Controller.getClienteById(3));
                     break;
                 case 0:
                     return;

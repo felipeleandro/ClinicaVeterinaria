@@ -62,6 +62,14 @@ public class ClienteDAO extends Observable {
         }
         return null;
     }
+    public Cliente getClienteById(int id) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getidCli() == id) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 
     // Updade
     public void updateCliente(Cliente cliente, String endereco, String telefone, String cep, String email) {

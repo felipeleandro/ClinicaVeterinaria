@@ -32,13 +32,13 @@ public class ClienteTableModel extends GenericTableModel {
 
         switch (columnIndex) {
             case 0:
-                return cliente.getNome();
+                return cliente.getNomCli();
             case 1:
-                return cliente.getEndereco();
+                return cliente.getEndCli();
             case 2:
-                return cliente.getTelefone();
+                return cliente.getTelCli();
             case 3:
-                return cliente.getCep();
+                return cliente.getCepCli();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -50,22 +50,22 @@ public class ClienteTableModel extends GenericTableModel {
 
         switch (columnIndex) {
             case 0:
-                cliente.setNome((String) aValue);
+                cliente.setNomCli((String) aValue);
                 break;
             case 1:
-                cliente.setEndereco((String) aValue);
+                cliente.setEndCli((String) aValue);
                 break;
             case 2:
-                cliente.setTelefone((String) aValue);
+                cliente.setTelCli((String) aValue);
                 break;
             case 3:
-                cliente.setCep((String) aValue);
+                cliente.setCepCli((String) aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
 
-        ClienteDAO.getInstance().update(cliente);
+     //AARUMAR   ClienteDAO.getInstance().updateCliente(cliente);
     }
 
     @Override
