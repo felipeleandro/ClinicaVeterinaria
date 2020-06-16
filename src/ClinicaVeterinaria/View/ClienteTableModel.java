@@ -7,7 +7,7 @@ import ClinicaVeterinaria.Models.ClienteDAO;
 public class ClienteTableModel extends GenericTableModel {
 
     public ClienteTableModel(ArrayList vDados) {
-        super(vDados, new String[] { "Nome", "EndereÃ§o", "Telefone", "CEP" });
+        super(vDados, new String[] { "Nome", "Endereço", "Telefone", "CEP" });
     }
 
     @Override

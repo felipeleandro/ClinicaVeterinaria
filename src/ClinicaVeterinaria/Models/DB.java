@@ -7,6 +7,7 @@ public class DB {
     private final static String user = "glikmsysebgpaw";
     private final static String password = "2ebd0404aca7bb90690b787e16a61d47e25cbc53cbdb076c99e65607a87da66c";
     private static Connection conn = null;
+    private final static boolean APAGAR_DADOS = false;
 
     public static Connection getConnection()
     {
@@ -15,6 +16,12 @@ public class DB {
             conn = DriverManager.getConnection(url, user, password);
 
             statement = conn.createStatement();
+            
+            if (APAGAR_DADOS)
+            {
+            	statement.execute("DELETE FROM Animais");
+            	statement.execute("DELETE FROM Clientes");
+            }
 
             statement.execute("CREATE TABLE IF NOT EXISTS Clientes(idCliente SERIAL PRIMARY KEY, nomCli VARCHAR(100), endCli VARCHAR(100), telCli VARCHAR(100), cepCli VARCHAR(100), emailCli VARCHAR(100))");
             statement.execute("CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal INTEGER, idEspecie INTEGER, idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");

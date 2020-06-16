@@ -1,13 +1,14 @@
 package ClinicaVeterinaria.View;
 
 import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.swing.table.TableModel;
 import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.ClienteDAO;
 
 public class TelaPrincipal extends javax.swing.JFrame {
-
-    /**
+	/**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
@@ -37,7 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton1.setText("Novo Cliente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               //Arrumar: jButton1ActionPerformed(evt);
+               jButton1ActionPerformed(evt);
             }
         });
 
@@ -78,21 +79,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/* ARRUMAR
+
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int newId = ClienteDAO.getInstance().addCliente("", "", "", "", "");
+        int newId = ClienteDAO.getInstance().addCliente("Cli1", "endereco", "(11)1111-1111", "11111-000", "teste@email.com" );
 
         if (newId >= 0) {
-            Cliente cliente = ClienteDAO.getInstance().getClienteById(newId);
+            Cliente cliente = ClienteDAO.getInstance().getClienteByIdCliente(newId);
 
             GenericTableModel tb = (GenericTableModel) jTable1.getModel();
 
             tb.addItem(cliente);
 
         }
-    }// GEN-LAST:event_jButton1ActionPerformed
-*/
+    }// GEN-LAST:event_jButton1ActionPerformed   
+    
+    
+    
     /**
      * @param args the command line arguments
      */

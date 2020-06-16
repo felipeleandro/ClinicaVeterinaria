@@ -17,7 +17,7 @@ public class Cliente {
 		listaAnimais = new ArrayList<>();
 	}
 
-	public Cliente(int idCli,String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+	public Cliente(int idCli, String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
 		this.idCli  = idCli;
 		this.nomCli = nomCli;
 		this.endCli = endCli;

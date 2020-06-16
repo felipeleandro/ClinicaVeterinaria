@@ -2,6 +2,7 @@ package ClinicaVeterinaria.Models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -10,12 +11,9 @@ import java.util.Observable;
 
 public class ClienteDAO extends Observable {
     private static ClienteDAO instance;
-    private List<Cliente> clientes;
-    private int id;
 
-    private ClienteDAO() {
-        clientes = new ArrayList<Cliente>();
-        id = 0;
+    private ClienteDAO() 
+    {
     }
 
     public static ClienteDAO getInstance() {
@@ -25,10 +23,14 @@ public class ClienteDAO extends Observable {
         return instance;
     }
 
-    public void addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+    public int addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
         PreparedStatement statement = null;
         Connection conn = null;
-        try {
+        ResultSet rs = null;
+        int idCliente = -1;
+        
+        try 
+        {
             conn = DB.getConnection();
             statement = conn.prepareStatement(
                     "INSERT INTO Clientes(nomCli, endCli, telCli, cepCli, emailCli) VALUES(?,?,?,?,?)",
@@ -40,54 +42,156 @@ public class ClienteDAO extends Observable {
             statement.setString(5, emailCli);
 
             statement.executeUpdate();
-
+            
+            rs = statement.getGeneratedKeys();
+            
+            if (rs.next())
+            	idCliente = rs.getInt(1);
+            
+            return idCliente;
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DB.closePreparedStatement(statement);
             DB.closeConnection();
         }
+        
+        return idCliente;
     }
 
     // RetrieveAll
     public List<Cliente> getAllClientes() {
-        return clientes;
-    }
+    	List<Cliente> result = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
 
-    public Cliente getClienteByNome(String nome) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getNomCli() == nome) {
-                return cliente;
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Clientes");
+
+            rs = statement.executeQuery();
+
+            while (rs.next()) {
+                result.add(buildObject(rs));
             }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
-    }
-    public Cliente getClienteById(int id) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getidCli() == id) {
-                return cliente;
-            }
-        }
-        return null;
+
+        return result;
     }
 
-    // Updade
-    public void updateCliente(Cliente cliente, String endereco, String telefone, String cep, String email) {
-        int pos = clientes.indexOf(cliente);
+    public Cliente getClienteByNome(String nomeCliente) {
+    	Cliente result = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
 
-        if (pos > 0) {
-            cliente.setTelCli(telefone);
-            cliente.setEmailCli(email);
-            cliente.setEndCli(endereco);
-            cliente.setCepCli(cep);
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE nomCli = ?");
+            statement.setString(1, nomeCliente);
 
-            clientes.set(pos, cliente);
+            rs = statement.executeQuery();
+            
+            result = buildObject(rs);
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    
+    public Cliente getClienteByIdCliente(int idCliente) {
+    	Cliente result = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE idCliente = ?");
+            statement.setInt(1, idCliente);
+
+            rs = statement.executeQuery();
+            
+            if (rs.next())
+            	result = buildObject(rs);
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    // Update
+    public void updateCliente(int idCliente, String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
+    	Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("UPDATE Clientes SET "
+            								+ "nomCli = ?,"
+            								+ "endCli = ?,"
+            								+ "telCli = ?,"
+            								+ "cepCli = ?,"
+            								+ "emailCli = ?,"
+            								+ "WHERE idCliente = ?");
+            
+            statement.setString(1, nomCli);
+            statement.setString(1, endCli);
+            statement.setString(1, telCli);
+            statement.setString(1, cepCli);
+            statement.setString(1, emailCli);
+            statement.setInt(1, idCliente);
+
+            statement.executeUpdate();   
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     // Delete
-    public void deleteCliente(Cliente cliente) {
-        clientes.remove(cliente);
+    public void deleteClienteByIdCliente(int idCliente) {
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("DELETE FROM Clientes WHERE idCliente = ?");
+            statement.setInt(1, idCliente);
+
+            statement.executeUpdate();   
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private Cliente buildObject(ResultSet rs) {
+        Cliente cliente = null;
+        try 
+        {
+            cliente = 
+            		new Cliente
+            		(rs.getInt("idCliente"),
+            		rs.getString("nomCli"),
+            		rs.getString("endCli"),
+            		rs.getString("telCli"),
+            		rs.getString("cepCli"),
+            		rs.getString("emailCli"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cliente;
     }
 
 }

@@ -7,12 +7,8 @@ import java.util.Observable;
 
 public class AnimalDAO extends Observable {
     private static AnimalDAO instance;
-    private List<Animal> animais;
-    private int id;
 
     private AnimalDAO() {
-        animais = new ArrayList();
-        id = 0;
     }
 
     public static AnimalDAO getInstance() {
@@ -47,7 +43,7 @@ public class AnimalDAO extends Observable {
         }
     }
 
-    public List<Animal> retrieveByIdCliente(int idCliente) {
+    public List<Animal> getAnimalByIdCliente(int idCliente) {
         List<Animal> result = null;
         ResultSet rs = null;
         Connection conn = null;
@@ -73,45 +69,114 @@ public class AnimalDAO extends Observable {
         return result;
     }
 
-    public List getAllAnimais() {
-        return animais;
+    public List<Animal> getAllAnimais() {
+    	List<Animal> result = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Animais");
+            rs = statement.executeQuery();
+            
+            while (rs.next())
+            {
+            	result.add(buildObject(rs));
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
-    public Animal getAnimalById(int id) {
-        for (Animal animal : animais) {
-            if (animal.getId() == id) {
-                return animal;
-            }
+    public Animal getAnimalByIdAnimal(int idAnimal) {
+    	Animal result = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Animais WHERE idAnimal = ?");
+            statement.setInt(1, idAnimal);
+
+            rs = statement.executeQuery();
+            
+            result = buildObject(rs);
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return result;
     }
 
     public Animal getAnimalByNome(String nomeAnimal) {
-        for (Animal animal : animais) {
-            if (animal.getNomeAnimal() == nomeAnimal) {
-                return animal;
-            }
+    	Animal result = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT * FROM Animais WHERE nomeAnimal = ?");
+            statement.setString(1, nomeAnimal);
+
+            rs = statement.executeQuery();
+            
+            result = buildObject(rs);
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return result;
     }
 
-    // Updade
-    public void updateAnimal(Animal animal, String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int id) {
-        int pos = animais.indexOf(animal);
+    // Update
+    public void updateAnimal(int idAnimal, String nomeAnimal, int idadeAnimal, int sexoAnimal) {
+    	Connection conn = null;
+        PreparedStatement statement = null;
 
-        if (pos > 0) {
-            animal.setNomeAnimal(nomeAnimal);
-            animal.setIdadeAnimal(idadeAnimal);
-            animal.setSexoAnimal(sexoAnimal);
-            animal.setEspecie(especie);
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("UPDATE Animais SET "
+            								+ "nomeAnimal = ?,"
+            								+ "idadeAnimal = ?,"
+            								+ "sexoAnimal = ?,"
+            								+ "WHERE idAnimal = ?");
+            
+            statement.setString(1, nomeAnimal);
+            statement.setInt(1, idadeAnimal);
+            statement.setInt(1, sexoAnimal);
+            statement.setInt(1, idAnimal);
 
-            animais.set(pos, animal);
+            statement.executeUpdate();   
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     // Delete
-    public void deleteAnimal(Animal animal) {
-        animais.remove(animal);
+    public void deleteAnimalByIdAnimal(int idAnimal) {
+    	Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("DELETE FROM Animais WHERE idAnimal = ?");
+            statement.setInt(1, idAnimal);
+
+            statement.executeQuery();   
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private Animal buildObject(ResultSet rs) {
@@ -119,6 +184,7 @@ public class AnimalDAO extends Observable {
         try {
             Especie especie = new Especie();
             especie.setNomEsp("gato");
+            
             animal = new Animal(rs.getString("nomeAnimal"),
                     rs.getInt("idadeAnimal"),
                     rs.getInt("sexoAnimal"),

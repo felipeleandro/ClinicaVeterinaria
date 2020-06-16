@@ -24,23 +24,23 @@ public class Controller {
         AnimalDAO.getInstance().addAnimal(nomeAnimal, idadeAnimal, sexoAnimal, especie, idCliente);
     }
 
-    public static List getAllAnimais() {
+    public static List<Animal> getAllAnimais() {
         return AnimalDAO.getInstance().getAllAnimais();
     }
 
     public static List getAnimalByIdCliente(int idCliente) {
-        return AnimalDAO.getInstance().retrieveByIdCliente(idCliente);
+        return AnimalDAO.getInstance().getAnimalByIdCliente(idCliente);
     }
 
     public static void addCliente(String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
         ClienteDAO.getInstance().addCliente(nomCli, endCli, telCli, cepCli, emailCli);
     }
 
-    public static List getClienteById(int idCliente) {
-        return AnimalDAO.getInstance().retrieveByIdCliente(idCliente);
+    public static Cliente getClienteById(int idCliente) {
+        return ClienteDAO.getInstance().getClienteByIdCliente(idCliente);
     }
     
-    public static List getAllClientes() {
+    public static List<Cliente> getAllClientes() {
         return ClienteDAO.getInstance().getAllClientes();
     }
     
