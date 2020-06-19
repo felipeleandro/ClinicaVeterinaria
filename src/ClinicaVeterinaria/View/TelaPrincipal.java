@@ -6,6 +6,10 @@ import javax.swing.JButton;
 import javax.swing.table.TableModel;
 import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.ClienteDAO;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import java.awt.Color;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 	/**
@@ -38,33 +42,55 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton1.setText("Novo Cliente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton1ActionPerformed(evt);
+            	jButton1ActionPerformed(evt);
             }
         });
 
         jTable1.setModel(new ClienteTableModel((ArrayList) ClienteDAO.getInstance().getAllClientes()));
         jScrollPane1.setViewportView(jTable1);
+        
+        jButton2 = new JButton("Ver Animais");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+               
+               TelaAnimal obj = new TelaAnimal();
+               obj.setVisible(true);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1Layout.setHorizontalGroup(
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(218)
+        					.addComponent(jLabel1)))
+        			.addContainerGap())
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jButton1)
+        			.addPreferredGap(ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+        			.addComponent(jButton2)
+        			.addGap(48))
+        );
+        jPanel1Layout.setVerticalGroup(
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jLabel1)
+        			.addGap(5)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jButton1)
+        				.addComponent(jButton2))
+        			.addGap(18)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                        jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1).addGap(192, 192, 192))
-                .addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup().addComponent(jButton1).addGap(0, 0,
-                                        Short.MAX_VALUE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
-                        .addContainerGap()));
-        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(jLabel1).addGap(5, 5, 5)
-                        .addComponent(jButton1).addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,5 +171,5 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
+    private JButton jButton2;
 }
