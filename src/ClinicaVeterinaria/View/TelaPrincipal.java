@@ -8,7 +8,6 @@ import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.ClienteDAO;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
-import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TelaPrincipal extends javax.swing.JFrame {
