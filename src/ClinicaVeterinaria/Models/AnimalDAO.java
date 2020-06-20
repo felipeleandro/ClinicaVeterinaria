@@ -19,9 +19,11 @@ public class AnimalDAO extends Observable {
         return instance;
     }
 
-    public void addAnimal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int idCliente) {
+    public int addAnimal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int idCliente) {
         PreparedStatement statement = null;
         Connection conn = null;
+        ResultSet rs = null;
+        int idAnimal = -1;
         try {
             conn = DB.getConnection();
             statement = conn.prepareStatement(
@@ -34,6 +36,12 @@ public class AnimalDAO extends Observable {
             statement.setInt(5, idCliente);
 
             statement.executeUpdate();
+            
+            rs = statement.getGeneratedKeys();
+            
+            if (rs.next())
+            	idAnimal = rs.getInt(1);
+            return idAnimal;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,6 +49,8 @@ public class AnimalDAO extends Observable {
             DB.closePreparedStatement(statement);
             DB.closeConnection();
         }
+		return idAnimal;
+        
     }
 
     public List<Animal> getAnimalByIdCliente(int idCliente) {
