@@ -5,8 +5,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/bruno/Downloads/Felipe/Setups/postgresql-42.2.12.jar"/>
+	<classpathentry excluding="imgs/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/imgs"/>
+	<classpathentry kind="lib" path="src/lib/Imgs.jar"/>
+	<classpathentry kind="lib" path="src/lib/postgresql-42.2.12.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.fx.runtime.EJCF_FX_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>

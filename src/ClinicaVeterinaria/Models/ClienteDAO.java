@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import ClinicaVeterinaria.Controller.Controller;
+
 public class ClienteDAO extends Observable {
     private static ClienteDAO instance;
 
@@ -53,14 +55,12 @@ public class ClienteDAO extends Observable {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DB.closePreparedStatement(statement);
-            DB.closeConnection();
+            DB.closePreparedStatement(statement);            
         }
         
         return idCliente;
     }
-
-    // RetrieveAll
+    
     public List<Cliente> getAllClientes() {
     	List<Cliente> result = new ArrayList<>();
         ResultSet rs = null;
@@ -84,8 +84,34 @@ public class ClienteDAO extends Observable {
 
         return result;
     }
+    
+    public List<Cliente> getAllClientesAndAnimals() {
+    	List<Cliente> result = new ArrayList<>();
+        ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
 
-    public Cliente getClienteByNome(String nomeCliente) {
+        try {
+            conn = DB.getConnection();
+            statement = conn.prepareStatement("SELECT C.idCliente, C.nomCli, C.endCli, C.telCli, C.cepCli, C.emailCli "            								
+            								+ "FROM Clientes C "
+            								+ "INNER JOIN Animais A ON C.idCliente = A.idCliente");
+
+            rs = statement.executeQuery();
+
+            while (rs.next()) {
+                result.add(buildObjectWithAnimal(rs));
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }    
+
+	public Cliente getClienteByNome(String nomeCliente) {
     	Cliente result = null;
         ResultSet rs = null;
         Connection conn = null;
@@ -193,5 +219,30 @@ public class ClienteDAO extends Observable {
         }
         return cliente;
     }
+    
+    private Cliente buildObjectWithAnimal(ResultSet rs) {
+    	Cliente cliente = null;
+        try 
+        {
+            cliente = 
+            		new Cliente
+            		(rs.getInt("idCliente"),
+            		rs.getString("nomCli"),
+            		rs.getString("endCli"),
+            		rs.getString("telCli"),
+            		rs.getString("cepCli"),
+            		rs.getString("emailCli"));
+            
+            List<Animal> listaAnimais = Controller.getAnimalByIdCliente(rs.getInt("idCliente"));
+            
+            for (Animal animal : listaAnimais) {
+    			cliente.addListaAnimais(animal);
+    		}            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cliente;
+	}
 
 }

@@ -1,8 +1,8 @@
 package ClinicaVeterinaria.View;
 
 import java.util.ArrayList;
+
 import ClinicaVeterinaria.Models.Cliente;
-import ClinicaVeterinaria.Models.ClienteDAO;
 
 public class ClienteTableModel extends GenericTableModel {
 

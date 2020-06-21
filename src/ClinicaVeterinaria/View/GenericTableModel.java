@@ -3,14 +3,12 @@ package ClinicaVeterinaria.View;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
-/**
- * @author Prof. Dr. Plinio Vilela - prvilela@unicamp.br
- */
 public abstract class GenericTableModel extends AbstractTableModel {
     protected ArrayList<Object> vDados;
     protected String[] colunas;

@@ -1,20 +1,97 @@
 package ClinicaVeterinaria.View;
 
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
-import javax.swing.table.TableModel;
-import ClinicaVeterinaria.Models.Cliente;
-import ClinicaVeterinaria.Models.ClienteDAO;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import ClinicaVeterinaria.Models.DB;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 	/**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
+		setTitle("Tela Principal");
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu_1 = new JMenu("Cadastros");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Cliente");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovoCliente obj = new TelaNovoCliente();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Animal");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovoAnimal obj = new TelaNovoAnimal();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JMenu mnNewMenu = new JMenu("Relat\u00F3rios");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Lista de Clientes");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCliente obj = new TelaCliente();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Lista de Animais");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAnimal obj = new TelaAnimal();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Lista de Clientes x Animais");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaClienteAnimal obj = new TelaClienteAnimal();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_5);
+		
+		JMenu mnNewMenu_2 = new JMenu("Sobre");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Sobre");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaSobre obj = new TelaSobre();				
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_4);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/background.png")));
+		lblNewLabel.setBounds(10, 10, 565, 313);
+		getContentPane().add(lblNewLabel);
+		
         initComponents();
     }
 
@@ -28,97 +105,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Lista de Clientes");
-
-        jButton1.setText("Novo Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new ClienteTableModel((ArrayList) ClienteDAO.getInstance().getAllClientes()));
-        jScrollPane1.setViewportView(jTable1);
-        
-        jButton2 = new JButton("Ver Animais");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               
-               TelaAnimal obj = new TelaAnimal();
-               obj.setVisible(true);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(218)
-        					.addComponent(jLabel1)))
-        			.addContainerGap())
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(jButton1)
-        			.addPreferredGap(ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
-        			.addComponent(jButton2)
-        			.addGap(48))
-        );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(jLabel1)
-        			.addGap(5)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jButton1)
-        				.addComponent(jButton2))
-        			.addGap(18)
-        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1.setLayout(jPanel1Layout);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap()));
-
-        pack();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);        
     }// </editor-fold>//GEN-END:initComponents
-
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int newId = ClienteDAO.getInstance().addCliente("Cli1", "endereco", "(11)1111-1111", "11111-000", "teste@email.com" );
-
-        if (newId >= 0) {
-            Cliente cliente = ClienteDAO.getInstance().getClienteByIdCliente(newId);
-
-            GenericTableModel tb = (GenericTableModel) jTable1.getModel();
-
-            tb.addItem(cliente);
-
-        }
-    }// GEN-LAST:event_jButton1ActionPerformed   
     
     
     
@@ -158,17 +146,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaPrincipal().setVisible(true);
+            public void run() {            	
+                TelaPrincipal obj = new TelaPrincipal();
+                obj.setVisible(true);
+                obj.setSize(500, 500);
+                
+                DB.getConnection();
+                
+                obj.addWindowListener(new WindowAdapter() {
+        	        @Override
+        	        public void windowClosed(WindowEvent e) {
+        	        	DB.closeConnection();
+        	        }
+
+        	    });
+                
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private JButton jButton2;
 }

@@ -2,13 +2,13 @@ package ClinicaVeterinaria.Controller;
 
 import java.util.List;
 import java.util.Observer;
-import java.util.Map;
 
 import ClinicaVeterinaria.Models.Animal;
 import ClinicaVeterinaria.Models.AnimalDAO;
 import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.ClienteDAO;
 import ClinicaVeterinaria.Models.Especie;
+import ClinicaVeterinaria.Models.SexoAnimal;
 
 public class Controller {
 
@@ -20,7 +20,7 @@ public class Controller {
         AnimalDAO.getInstance().addObserver(observer);
     }
 
-    public static void addAnimal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int idCliente) {
+    public static void addAnimal(String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, int idCliente) {
         AnimalDAO.getInstance().addAnimal(nomeAnimal, idadeAnimal, sexoAnimal, especie, idCliente);
     }
 
@@ -28,7 +28,7 @@ public class Controller {
         return AnimalDAO.getInstance().getAllAnimais();
     }
 
-    public static List getAnimalByIdCliente(int idCliente) {
+    public static List<Animal> getAnimalByIdCliente(int idCliente) {
         return AnimalDAO.getInstance().getAnimalByIdCliente(idCliente);
     }
 
@@ -42,6 +42,10 @@ public class Controller {
     
     public static List<Cliente> getAllClientes() {
         return ClienteDAO.getInstance().getAllClientes();
+    }
+    
+    public static List<Cliente> getAllClientesAnimals() {
+        return ClienteDAO.getInstance().getAllClientesAndAnimals();
     }
     
    public static void deleteCliente(Cliente cliente) {

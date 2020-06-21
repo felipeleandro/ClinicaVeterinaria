@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Especie {
 
+	private int idEspecie;
 	private String nomEsp;
 	private ArrayList<Animal> listaAnimais;
 
@@ -11,9 +12,18 @@ public class Especie {
 		listaAnimais = new ArrayList<>();
 	}
 
-	public Especie(String nomEsp) {
+	public Especie(int idEspecie, String nomEsp) {
+		this.idEspecie = idEspecie;
 		this.nomEsp = nomEsp;
 		listaAnimais = new ArrayList<>();
+	}
+
+	public int getIdEspecie() {
+		return idEspecie;
+	}
+
+	public void setIdEspecie(int idEspecie) {
+		this.idEspecie = idEspecie;
 	}
 
 	public String getNomEsp() {

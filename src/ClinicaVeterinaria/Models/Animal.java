@@ -6,7 +6,7 @@ public class Animal {
 	private int id; 
     private String nomeAnimal;
     private int idadeAnimal;
-    private int sexoAnimal;
+    private SexoAnimal sexoAnimal;
     private Especie especie;
     private ArrayList<Tratamento> listaTratamentos;
 
@@ -14,7 +14,7 @@ public class Animal {
         listaTratamentos = new ArrayList<>();
     }
 
-    public Animal(String nomeAnimal, int idadeAnimal, int sexoAnimal, Especie especie, int id) {
+    public Animal(String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, int id) {
         this.id=id;
     	this.nomeAnimal = nomeAnimal;
         this.idadeAnimal = idadeAnimal;
@@ -55,11 +55,11 @@ public class Animal {
         this.idadeAnimal = idadeAnimal;
     }
 
-    public int getSexoAnimal() {
+    public SexoAnimal getSexoAnimal() {
         return sexoAnimal;
     }
 
-    public void setSexoAnimal(int sexoAnimal) {
+    public void setSexoAnimal(SexoAnimal sexoAnimal) {
         this.sexoAnimal = sexoAnimal;
     }
 
@@ -69,16 +69,6 @@ public class Animal {
     
     public void setId(int id) {
     	this.id=id;
-    }
-    
-    private String ViaAnimal()
-    {
-        return null;
-    }
-
-    private String ConAnimal()
-    {
-        return null;
     }
 
     @Override

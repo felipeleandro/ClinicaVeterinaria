@@ -1,7 +1,5 @@
 package ClinicaVeterinaria.Models;
 
-import ClinicaVeterinaria.Models.Animal;
-
 import java.util.ArrayList;
 
 public class Cliente {
@@ -87,8 +85,8 @@ public class Cliente {
 		return listaAnimais;
 	}
 
-	public void setListaAnimais(ArrayList<Animal> listaAnimais) {
-		this.listaAnimais = listaAnimais;
+	public void addListaAnimais(Animal animal) {
+		listaAnimais.add(animal);
 	}
 
 	@Override
