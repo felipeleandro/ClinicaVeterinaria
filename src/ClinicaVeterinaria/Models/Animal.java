@@ -3,25 +3,35 @@ package ClinicaVeterinaria.Models;
 import java.util.ArrayList;
 
 public class Animal {
-	private int id; 
+	private int idAnimal; 
     private String nomeAnimal;
     private int idadeAnimal;
     private SexoAnimal sexoAnimal;
     private Especie especie;
-    private ArrayList<Tratamento> listaTratamentos;
+    private int idCliente;
+    private ArrayList<Tratamento> listaTratamentos;    
 
-    public Animal() {
+	public Animal() {
         listaTratamentos = new ArrayList<>();
     }
 
-    public Animal(String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, int id) {
-        this.id=id;
+    public Animal(int idAnimal, String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, int idCliente) {
+        this.idAnimal = idAnimal;
     	this.nomeAnimal = nomeAnimal;
         this.idadeAnimal = idadeAnimal;
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
+        this.idCliente = idCliente;
         listaTratamentos = new ArrayList<>();
     }
+
+    public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
 
     public ArrayList<Tratamento> getListaTratamentos() {
         return listaTratamentos;
@@ -63,12 +73,12 @@ public class Animal {
         this.sexoAnimal = sexoAnimal;
     }
 
-    public int getId() {
-    	return id;
+    public int getIdAnimal() {
+    	return idAnimal;
     }
     
-    public void setId(int id) {
-    	this.id=id;
+    public void setIdAnimal(int idAnimal) {
+    	this.idAnimal = idAnimal;
     }
 
     @Override

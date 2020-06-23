@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.Diversos;
 
 import java.awt.EventQueue;
 import java.awt.Font;

@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.Cadastros;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -116,10 +116,9 @@ public class TelaNovoAnimal extends JFrame {
 		btnSalvarAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomeAnimal = txtNome.getText();
-				int idadeAnimal = Integer.parseInt(txtIdade.getText());
-				String sexoAnimal = txtSexo.getText();
-				int idCliente = Integer.parseInt(txtIdCliente.getText());
 				String nomeEspecie = txtEspecie.getText();
+				int idadeAnimal = Integer.parseInt(txtIdade.getText());				
+				int idCliente = Integer.parseInt(txtIdCliente.getText());				
 				
 				SexoAnimal sexoAnimalClasse = SexoAnimal.fromSexo(txtSexo.getText());
 				Especie especie = new Especie(1, nomeEspecie);				

@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.Atualizacao;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,15 +13,18 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
+import ClinicaVeterinaria.Models.Especie;
+import ClinicaVeterinaria.Models.SexoAnimal;
 
-public class TelaNovoCliente extends JFrame {
+public class TelaAtualizarAnimal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNome;
-	private JTextField txtEndereco;
-	private JTextField txtTelefone;
-	private JTextField txtCEP;
-	private JTextField txtEmail;
+	public JTextField txtNome;
+	public JTextField txtEspecie;
+	public JTextField txtIdade;
+	public JTextField txtSexo;
+	public JTextField txtIdCliente;
+	public JTextField txtIdAnimal;
 
 	/**
 	 * Launch the application.
@@ -30,7 +33,7 @@ public class TelaNovoCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaNovoCliente frame = new TelaNovoCliente();
+					TelaAtualizarAnimal frame = new TelaAtualizarAnimal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,8 +45,8 @@ public class TelaNovoCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaNovoCliente() {
-		setTitle("Novo Cliente");
+	public TelaAtualizarAnimal() {
+		setTitle("Atualizar Animal");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 483, 287);
 		contentPane = new JPanel();
@@ -51,7 +54,7 @@ public class TelaNovoCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Novo Cliente");
+		JLabel lblNewLabel = new JLabel("Atualizar Animal");
 		lblNewLabel.setBounds(187, 10, 96, 13);
 		contentPane.add(lblNewLabel);
 		
@@ -66,60 +69,65 @@ public class TelaNovoCliente extends JFrame {
 		lblNome.setBounds(20, 39, 96, 13);
 		contentPane.add(lblNome);
 		
-		txtEndereco = new JTextField();
-		txtEndereco.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtEndereco.setColumns(10);
-		txtEndereco.setBounds(20, 100, 96, 22);
-		contentPane.add(txtEndereco);
+		txtEspecie = new JTextField();
+		txtEspecie.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtEspecie.setColumns(10);
+		txtEspecie.setBounds(20, 100, 96, 22);
+		contentPane.add(txtEspecie);
 		
-		JLabel lblEspcie = new JLabel("Endere\u00E7o");
+		JLabel lblEspcie = new JLabel("Esp\u00E9cie");
 		lblEspcie.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblEspcie.setBounds(20, 85, 96, 13);
 		contentPane.add(lblEspcie);
 		
-		txtTelefone = new JTextField();
-		txtTelefone.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtTelefone.setColumns(10);
-		txtTelefone.setBounds(20, 140, 96, 22);
-		contentPane.add(txtTelefone);
+		txtIdade = new JTextField();
+		txtIdade.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtIdade.setColumns(10);
+		txtIdade.setBounds(20, 140, 96, 22);
+		contentPane.add(txtIdade);
 		
-		JLabel lblIdade = new JLabel("Telefone");
+		JLabel lblIdade = new JLabel("Idade");
 		lblIdade.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblIdade.setBounds(20, 125, 96, 13);
 		contentPane.add(lblIdade);
 		
-		txtCEP = new JTextField();
-		txtCEP.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtCEP.setColumns(10);
-		txtCEP.setBounds(20, 180, 96, 22);
-		contentPane.add(txtCEP);
+		txtSexo = new JTextField();
+		txtSexo.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtSexo.setColumns(10);
+		txtSexo.setBounds(20, 180, 96, 22);
+		contentPane.add(txtSexo);
 		
-		JLabel lblSexo = new JLabel("CEP");
+		JLabel lblSexo = new JLabel("Sexo (M ou F)");
 		lblSexo.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblSexo.setBounds(20, 165, 96, 13);
 		contentPane.add(lblSexo);
 		
-		JLabel lblIdDoCliente = new JLabel("E-mail");
+		JLabel lblIdDoCliente = new JLabel("Id do Cliente");
 		lblIdDoCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblIdDoCliente.setBounds(20, 205, 96, 13);
 		contentPane.add(lblIdDoCliente);
 		
-		txtEmail = new JTextField();
-		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtEmail.setColumns(10);
-		txtEmail.setBounds(20, 220, 96, 22);
-		contentPane.add(txtEmail);
+		txtIdCliente = new JTextField();
+		txtIdCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtIdCliente.setColumns(10);
+		txtIdCliente.setBounds(20, 220, 96, 22);
+		contentPane.add(txtIdCliente);
 		
 		JButton btnSalvarAnimal = new JButton("Gravar");
 		btnSalvarAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nomeCliente = txtNome.getText();
-				String enderecoCliente = txtEndereco.getText();
-				String telCliente = txtTelefone.getText();
-				String cepCliente = txtCEP.getText();
-				String emailCliente = txtEmail.getText();					
 				
-				Controller.addCliente(nomeCliente, enderecoCliente, telCliente, cepCliente, emailCliente);
+				int idAnimal = Integer.parseInt(txtIdAnimal.getText());				
+				String nomeAnimal = txtNome.getText();
+				String nomeEspecie = txtEspecie.getText();
+				int idadeAnimal = Integer.parseInt(txtIdade.getText());			
+				
+				int idCliente = Integer.parseInt(txtIdCliente.getText());				
+				
+				SexoAnimal sexoAnimalClasse = SexoAnimal.fromSexo(txtSexo.getText());
+				Especie especie = new Especie(1, nomeEspecie);				
+				
+				Controller.updateAnimal(idAnimal, nomeAnimal, idadeAnimal, sexoAnimalClasse, especie, idCliente);
 				
 				setVisible(false); 
 				dispose(); 
@@ -127,5 +135,10 @@ public class TelaNovoCliente extends JFrame {
 		});	
 		btnSalvarAnimal.setBounds(363, 220, 96, 21);
 		contentPane.add(btnSalvarAnimal);
+		
+		txtIdAnimal = new JTextField();
+		txtIdAnimal.setBounds(275, 9000, 96, 19);
+		contentPane.add(txtIdAnimal);
+		txtIdAnimal.setColumns(10);
 	}
 }

@@ -2,10 +2,17 @@ package ClinicaVeterinaria.Models;
 
 public class Exame
 {
+	private int idExame;
     private String desExame;
     private Consulta consulta;
 
     public Exame() {
+    }
+    
+    public Exame(int idExame, String desExame, Consulta consulta) {
+    	this.idExame = idExame;
+        this.desExame = desExame;
+        this.consulta = consulta;
     }
 
     public Exame(String desExame, Consulta consulta) {
@@ -13,7 +20,15 @@ public class Exame
         this.consulta = consulta;
     }
 
-    public String getDesExame() {
+    public int getIdExame() {
+		return idExame;
+	}
+
+	public void setIdExame(int idExame) {
+		this.idExame = idExame;
+	}
+
+	public String getDesExame() {
         return desExame;
     }
 

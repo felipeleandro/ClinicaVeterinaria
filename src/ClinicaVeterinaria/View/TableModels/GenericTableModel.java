@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.TableModels;
 
 import java.awt.Point;
 import java.awt.Rectangle;

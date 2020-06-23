@@ -1,12 +1,8 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.Relatorios;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,10 +11,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
-import ClinicaVeterinaria.Models.Animal;
+import ClinicaVeterinaria.Models.Cliente;
+import ClinicaVeterinaria.View.Principal.TelaPrincipal;
+import ClinicaVeterinaria.View.TableModels.ClienteAnimalTableModel;
 
 @SuppressWarnings("serial")
-public class TelaAnimal extends javax.swing.JFrame {
+public class TelaClienteAnimal extends javax.swing.JFrame {
 
 	private JPanel jPane1;
 	private JTable table;
@@ -28,7 +26,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAnimal() {
+	public TelaClienteAnimal() {
 		setTitle("Lista de Animais");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 544, 350);
@@ -38,43 +36,20 @@ public class TelaAnimal extends javax.swing.JFrame {
 		jPane1.setLayout(null);
 		
 		JLabel jLabel = new JLabel();
-		jLabel.setText("Lista de Animais");
-		jLabel.setBounds(211, 10, 86, 14);
+		jLabel.setText("Lista de Clientes x Animais");
+		jLabel.setBounds(189, 10, 179, 14);
 		jPane1.add(jLabel);
 		
-		JButton btnNovoAnimal = new JButton();
-		btnNovoAnimal.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
-			}
-		});
-		btnNovoAnimal.setText("Novo Animal");
-		btnNovoAnimal.setBounds(10, 42, 111, 23);
-		jPane1.add(btnNovoAnimal);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 91, 510, 194);
+		scrollPane.setBounds(10, 34, 510, 269);
 		jPane1.add(scrollPane);
 		
 		table = new JTable();
 		table.setEnabled(false);
-		table.setModel(new AnimalTableModel((ArrayList<Animal>) Controller.getAllAnimais()));
+		
+		table.setModel(new ClienteAnimalTableModel((ArrayList<Cliente>) Controller.getAllClientesAnimals()));
 		scrollPane.setViewportView(table);
 	}
-	
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-			TelaNovoAnimal obj = new TelaNovoAnimal();			
-			obj.setVisible(true);
-			
-			obj.addWindowListener(new WindowAdapter() {
-		        @Override
-		        public void windowClosed(WindowEvent e) {
-		        	table.setModel(new AnimalTableModel((ArrayList<Animal>) Controller.getAllAnimais()));
-		        }
-
-		    });
-	        
-		}
 	
 	/**
 	 * Launch the application.
@@ -104,7 +79,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				TelaAnimal frame = new TelaAnimal();
+				TelaClienteAnimal frame = new TelaClienteAnimal();
 				frame.setVisible(true);
 			}
 		});

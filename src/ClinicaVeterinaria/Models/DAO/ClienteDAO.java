@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Observable;
 
 import ClinicaVeterinaria.Controller.Controller;
+import ClinicaVeterinaria.Models.Animal;
+import ClinicaVeterinaria.Models.Cliente;
+import ClinicaVeterinaria.Models.DB;
 
-public class ClienteDAO extends Observable {
+public class ClienteDAO {
     private static ClienteDAO instance;
 
     private ClienteDAO() 
@@ -69,7 +72,7 @@ public class ClienteDAO extends Observable {
 
         try {
             conn = DB.getConnection();
-            statement = conn.prepareStatement("SELECT * FROM Clientes");
+            statement = conn.prepareStatement("SELECT * FROM Clientes ORDER BY idCliente");
 
             rs = statement.executeQuery();
 
@@ -95,7 +98,8 @@ public class ClienteDAO extends Observable {
             conn = DB.getConnection();
             statement = conn.prepareStatement("SELECT C.idCliente, C.nomCli, C.endCli, C.telCli, C.cepCli, C.emailCli "            								
             								+ "FROM Clientes C "
-            								+ "INNER JOIN Animais A ON C.idCliente = A.idCliente");
+            								+ "INNER JOIN Animais A ON C.idCliente = A.idCliente"
+            								+ "ORDER BY idCliente, idAnimal");
 
             rs = statement.executeQuery();
 
@@ -119,7 +123,7 @@ public class ClienteDAO extends Observable {
 
         try {
             conn = DB.getConnection();
-            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE nomCli = ?");
+            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE nomCli = ? ORDER BY idCliente");
             statement.setString(1, nomeCliente);
 
             rs = statement.executeQuery();
@@ -142,7 +146,7 @@ public class ClienteDAO extends Observable {
 
         try {
             conn = DB.getConnection();
-            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE idCliente = ?");
+            statement = conn.prepareStatement("SELECT * FROM Clientes WHERE idCliente = ? ORDER BY idCliente");
             statement.setInt(1, idCliente);
 
             rs = statement.executeQuery();
@@ -170,15 +174,15 @@ public class ClienteDAO extends Observable {
             								+ "endCli = ?,"
             								+ "telCli = ?,"
             								+ "cepCli = ?,"
-            								+ "emailCli = ?,"
+            								+ "emailCli = ? "
             								+ "WHERE idCliente = ?");
             
             statement.setString(1, nomCli);
-            statement.setString(1, endCli);
-            statement.setString(1, telCli);
-            statement.setString(1, cepCli);
-            statement.setString(1, emailCli);
-            statement.setInt(1, idCliente);
+            statement.setString(2, endCli);
+            statement.setString(3, telCli);
+            statement.setString(4, cepCli);
+            statement.setString(5, emailCli);
+            statement.setInt(6, idCliente);
 
             statement.executeUpdate();   
         } catch (SQLException e) {

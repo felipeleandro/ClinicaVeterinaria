@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.Principal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +12,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import ClinicaVeterinaria.Models.DB;
+import ClinicaVeterinaria.View.Cadastros.TelaNovoAnimal;
+import ClinicaVeterinaria.View.Cadastros.TelaNovoCliente;
+import ClinicaVeterinaria.View.Cadastros.TelaNovoVeterinario;
+import ClinicaVeterinaria.View.Diversos.TelaSobre;
+import ClinicaVeterinaria.View.Relatorios.TelaAnimal;
+import ClinicaVeterinaria.View.Relatorios.TelaCliente;
+import ClinicaVeterinaria.View.Relatorios.TelaClienteAnimal;
+import ClinicaVeterinaria.View.Relatorios.TelaVeterinario;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 	/**
@@ -44,6 +52,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
 		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Veterin\u00E1rio");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovoVeterinario obj = new TelaNovoVeterinario();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_6);
+		
 		JMenu mnNewMenu = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnNewMenu);
 		
@@ -73,6 +90,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Veterin\u00E1rios");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaVeterinario obj = new TelaVeterinario();
+				obj.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_7);
 		
 		JMenu mnNewMenu_2 = new JMenu("Sobre");
 		menuBar.add(mnNewMenu_2);

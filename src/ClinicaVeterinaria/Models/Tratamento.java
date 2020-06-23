@@ -3,21 +3,35 @@ package ClinicaVeterinaria.Models;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Tratamento
-{
-    private Date datIni;
-    private Date datFim;
-    private ArrayList<Consulta> listaConsultas;
+public class Tratamento {
+	private int idTratamento;
+	private Date datIni;
+	private Date datFim;
+	private ArrayList<Consulta> listaConsultas;
 
 	public Tratamento() {
 		listaConsultas = new ArrayList<>();
 	}
 
-	public Tratamento(Date datIni, Date datFim)
-{
+	public Tratamento(int idTratamento, Date datIni, Date datFim) {
+		this.idTratamento = idTratamento;
 		this.datIni = datIni;
 		this.datFim = datFim;
 		listaConsultas = new ArrayList<>();
+	}
+
+	public Tratamento(Date datIni, Date datFim) {
+		this.datIni = datIni;
+		this.datFim = datFim;
+		listaConsultas = new ArrayList<>();
+	}
+
+	public int getIdTratamento() {
+		return idTratamento;
+	}
+
+	public void setIdTratamento(int idTratamento) {
+		this.idTratamento = idTratamento;
 	}
 
 	public Date getDatIni() {
@@ -44,18 +58,15 @@ public class Tratamento
 		this.listaConsultas = listaConsultas;
 	}
 
-	public String VisTrat()
-	{
+	public String VisTrat() {
 		return null;
 	}
 
-	public String ConTrat()
-	{
+	public String ConTrat() {
 		return null;
 	}
 
-	public int RegTrat()
-	{
+	public int RegTrat() {
 		return 0;
 	}
 }

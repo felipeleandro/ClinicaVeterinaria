@@ -3,13 +3,17 @@ package ClinicaVeterinaria.Models;
 import java.util.ArrayList;
 
 public class Veterinario {
-    private int id;
+    private int idVeterinario;
     private String nomVet;
     private String endVet;
     private String telVet;
-    private ArrayList<Consulta> listaConsultas;
-
-    public Veterinario() {
+    private ArrayList<Consulta> listaConsultas;    
+    
+    public Veterinario(int idVeterinario, String nomVet, String endVet, String telVet) {
+    	this.idVeterinario = idVeterinario;
+        this.nomVet = nomVet;
+        this.endVet = endVet;
+        this.telVet = telVet;
         listaConsultas = new ArrayList<>();
     }
 
@@ -19,16 +23,20 @@ public class Veterinario {
         this.telVet = telVet;
         listaConsultas = new ArrayList<>();
     }
-
-    public int getId() {
-        return id;
+    
+    public Veterinario() {
+        listaConsultas = new ArrayList<>();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getIdVeterinario() {
+		return idVeterinario;
+	}
 
-    public String getNomVet() {
+	public void setIdVeterinario(int idVeterinario) {
+		this.idVeterinario = idVeterinario;
+	}
+
+	public String getNomVet() {
         return nomVet;
     }
 
@@ -57,7 +65,7 @@ public class Veterinario {
         return listaConsultas;
     }
 
-    public void setListaConsultas(ArrayList<Consulta> listaConsultas) {
-        this.listaConsultas = listaConsultas;
+    public void addListaConsultas(Consulta consulta) {
+        this.listaConsultas.add(consulta);
     }
 }

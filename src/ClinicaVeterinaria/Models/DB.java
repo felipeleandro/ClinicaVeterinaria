@@ -33,7 +33,17 @@ public class DB {
 				statement.execute(
 						"CREATE TABLE IF NOT EXISTS Clientes(idCliente SERIAL PRIMARY KEY, nomCli VARCHAR(100), endCli VARCHAR(100), telCli VARCHAR(100), cepCli VARCHAR(100), emailCli VARCHAR(100))");
 				statement.execute(
-						"CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal VARCHAR(1), idEspecie INTEGER, nomeEspecie VARCHAR(100), idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");
+						"CREATE TABLE IF NOT EXISTS Especies(idEspecie SERIAL PRIMARY KEY, nomeEspecie VARCHAR(100))");
+				statement.execute(
+						"CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal VARCHAR(1), idEspecie INTEGER, nomeEspecie VARCHAR(100), idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");				
+				statement.execute(
+						"CREATE TABLE IF NOT EXISTS Veterinarios(idVeterinario SERIAL PRIMARY KEY, nomeVeterinario VARCHAR(100), enderecoVeterinario VARCHAR(100), telefoneVeterinario VARCHAR(15))");
+				statement.execute(
+						"CREATE TABLE IF NOT EXISTS Tratamentos(idTratamento SERIAL PRIMARY KEY, dataInicial TIMESTAMP, dataFinal TIMESTAMP)");
+				statement.execute(
+						"CREATE TABLE IF NOT EXISTS Consultas(idConsulta SERIAL PRIMARY KEY, dataConsulta TIMESTAMP, historicoConsulta VARCHAR(200), idTratamento INTEGER, idVeterinario INTEGER, FOREIGN KEY(idTratamento) REFERENCES Tratamentos(idTratamento), FOREIGN KEY(idVeterinario) REFERENCES Veterinarios(idVeterinario))");
+				statement.execute(
+						"CREATE TABLE IF NOT EXISTS Exames(idExame SERIAL PRIMARY KEY, descricaoExame VARCHAR(100), idConsulta INTEGER, FOREIGN KEY(idConsulta) REFERENCES Consultas(idConsulta))");
 
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());

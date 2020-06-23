@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import ClinicaVeterinaria.Models.Cliente;
 public class ClienteTableModel extends GenericTableModel {
 
     public ClienteTableModel(ArrayList vDados) {
-        super(vDados, new String[] { "Nome", "Endereço", "Telefone", "CEP" });
+        super(vDados, new String[] { "Nome", "Endereço", "Telefone", "CEP", "E-mail"});
     }
 
     @Override
@@ -20,6 +20,8 @@ public class ClienteTableModel extends GenericTableModel {
             case 2:
                 return String.class;
             case 3:
+                return String.class;
+            case 4:
                 return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -39,6 +41,10 @@ public class ClienteTableModel extends GenericTableModel {
                 return cliente.getTelCli();
             case 3:
                 return cliente.getCepCli();
+            case 4:
+                return cliente.getEmailCli();
+            case 5:
+                return cliente.getidCli();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -61,6 +67,9 @@ public class ClienteTableModel extends GenericTableModel {
             case 3:
                 cliente.setCepCli((String) aValue);
                 break;
+            case 4:
+                cliente.setEmailCli((String) aValue);
+                break;                
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -70,7 +79,7 @@ public class ClienteTableModel extends GenericTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return false;
     }
 
 }

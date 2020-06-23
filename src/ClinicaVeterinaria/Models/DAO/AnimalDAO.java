@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class AnimalDAO extends Observable {
+import ClinicaVeterinaria.Models.Animal;
+import ClinicaVeterinaria.Models.DB;
+import ClinicaVeterinaria.Models.Especie;
+import ClinicaVeterinaria.Models.SexoAnimal;
+
+public class AnimalDAO {
 	private static AnimalDAO instance;
 
 	private AnimalDAO() {
@@ -54,8 +59,8 @@ public class AnimalDAO extends Observable {
 		} finally {
 			DB.closePreparedStatement(statement);			
 		}
+		
 		return idAnimal;
-
 	}
 
 	public List<Animal> getAnimalByIdCliente(int idCliente) {
@@ -66,7 +71,7 @@ public class AnimalDAO extends Observable {
 
 		try {
 			conn = DB.getConnection();
-			statement = conn.prepareStatement("SELECT * FROM Animais WHERE idCliente = ?");
+			statement = conn.prepareStatement("SELECT * FROM Animais WHERE idCliente = ? ORDER BY idAnimal");
 			statement.setInt(1, idCliente);
 
 			rs = statement.executeQuery();
@@ -92,7 +97,7 @@ public class AnimalDAO extends Observable {
 
 		try {
 			conn = DB.getConnection();
-			statement = conn.prepareStatement("SELECT * FROM Animais");
+			statement = conn.prepareStatement("SELECT * FROM Animais ORDER BY idAnimal");
 			rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -115,7 +120,7 @@ public class AnimalDAO extends Observable {
 
 		try {
 			conn = DB.getConnection();
-			statement = conn.prepareStatement("SELECT * FROM Animais WHERE idAnimal = ?");
+			statement = conn.prepareStatement("SELECT * FROM Animais WHERE idAnimal = ? ORDER BY idAnimal");
 			statement.setInt(1, idAnimal);
 
 			rs = statement.executeQuery();
@@ -138,7 +143,7 @@ public class AnimalDAO extends Observable {
 
 		try {
 			conn = DB.getConnection();
-			statement = conn.prepareStatement("SELECT * FROM Animais WHERE nomeAnimal = ?");
+			statement = conn.prepareStatement("SELECT * FROM Animais WHERE nomeAnimal = ? ORDER BY idAnimal");
 			statement.setString(1, nomeAnimal);
 
 			rs = statement.executeQuery();
@@ -152,30 +157,36 @@ public class AnimalDAO extends Observable {
 
 		return result;
 	}
-
-	// Update
-	public void updateAnimal(int idAnimal, String nomeAnimal, int idadeAnimal, Especie especieAnimal, int sexoAnimal) {
+	
+	public void updateAnimal(int idAnimal, String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especieAnimal, int idCliente) {
 		Connection conn = null;
 		PreparedStatement statement = null;
 
 		try {
 			conn = DB.getConnection();
-			statement = conn.prepareStatement("UPDATE Animais SET " + "nomeAnimal = ?," + "idadeAnimal = ?,"
-					+ "sexoAnimal = ?," + "idEspecie = ?" + "WHERE idAnimal = ?");
+			statement = conn.prepareStatement("UPDATE Animais SET " 
+											+ "nomeAnimal = ?," 
+											+ "idadeAnimal = ?,"
+											+ "sexoAnimal = ?," 
+											+ "idEspecie = ?,"
+											+ "nomeEspecie = ?,"
+											+ "idCliente = ?"
+											+ "WHERE idAnimal = ?");
 
 			statement.setString(1, nomeAnimal);
 			statement.setInt(2, idadeAnimal);
-			statement.setInt(3, sexoAnimal);
+			statement.setString(3, sexoAnimal.getSexo());
 			statement.setInt(4, especieAnimal.getIdEspecie());
-			statement.setInt(5, idAnimal);
+			statement.setString(5, especieAnimal.getNomEsp());
+			statement.setInt(6, idCliente);
+			statement.setInt(7, idAnimal);
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
-	// Delete
+	
 	public void deleteAnimalByIdAnimal(int idAnimal) {
 		Connection conn = null;
 		PreparedStatement statement = null;
@@ -200,7 +211,7 @@ public class AnimalDAO extends Observable {
 			SexoAnimal sexoAnimal = SexoAnimal.fromSexo(rs.getString("sexoAnimal"));
 			Especie especie = new Especie(idEspecie, nomeEspecie);
 			
-			animal = new Animal(rs.getString("nomeAnimal"), rs.getInt("idadeAnimal"), sexoAnimal, especie, rs.getInt("idCliente"));
+			animal = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getInt("idadeAnimal"), sexoAnimal, especie, rs.getInt("idCliente"));
 		} catch (SQLException e) { 
 			e.printStackTrace();
 		}

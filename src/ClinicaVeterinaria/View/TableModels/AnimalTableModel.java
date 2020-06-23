@@ -1,18 +1,17 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
 import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.Especie;
 import ClinicaVeterinaria.Models.SexoAnimal;
 import ClinicaVeterinaria.Models.Tratamento;
 
 
-public class ClienteAnimalTableModel extends GenericTableModel{
+public class AnimalTableModel extends GenericTableModel{
 
-	public ClienteAnimalTableModel(ArrayList vDados) {
-		super(vDados, new String[] { "Nome Cliente", "Nome Animal", "Idade Animal", "Gênero Animal", "Espécie Animal"});
+	public AnimalTableModel(ArrayList vDados) {
+		super(vDados, new String[] { "Nome", "Espécie", "Idade", "Gênero"});
 	}
 
 	 @Override
@@ -27,26 +26,28 @@ public class ClienteAnimalTableModel extends GenericTableModel{
 	            case 3:
 	                return String.class;
 	            case 4:
-	                return String.class;	            
+	                return String.class;
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
 	    }
 	 @Override
 	    public Object getValueAt(int rowIndex, int columnIndex) {
-	        Cliente cliente = (Cliente) vDados.get(rowIndex);
+	        Animal animal = (Animal) vDados.get(rowIndex);
 
 	        switch (columnIndex) {
 	            case 0:
-	                return cliente.getNomCli();
+	                return animal.getNomeAnimal();
 	            case 1:
-	                return cliente.getListaAnimais().get(rowIndex).getNomeAnimal();
+	            	return animal.getEspecie();	                
 	            case 2:
-	            	return cliente.getListaAnimais().get(rowIndex).getIdadeAnimal();
+	            	return animal.getIdadeAnimal();	                
 	            case 3:
-	            	return cliente.getListaAnimais().get(rowIndex).getSexoAnimal();
+	            	return animal.getSexoAnimal();	                
 	            case 4:
-	            	return cliente.getListaAnimais().get(rowIndex).getEspecie().getNomEsp();	            
+	                return animal.getIdAnimal();
+	            case 5:
+	                return animal.getIdCliente();
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
@@ -60,24 +61,21 @@ public class ClienteAnimalTableModel extends GenericTableModel{
 	                animal.setNomeAnimal((String) aValue);
 	                break;
 	            case 1:
-	                animal.setIdadeAnimal((int) aValue);
+	            	animal.setEspecie((Especie) aValue);	                
 	                break;
 	            case 2:
-	                animal.setSexoAnimal(SexoAnimal.fromSexo((String) aValue));
+	            	animal.setIdadeAnimal((int) aValue);	                
 	                break;
 	            case 3:
-	                animal.setEspecie((Especie) aValue);
-	                break;
-	            case 4:
-	                animal.setListaTratamentos((ArrayList<Tratamento>) aValue);
-	                break;    
+	            	animal.setSexoAnimal(SexoAnimal.fromSexo((String) aValue));
+	                break;	            
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
 	 }
 	        @Override
 	        public boolean isCellEditable(int rowIndex, int columnIndex) {
-	            return true;
+	            return false;
 	        }
 
 }

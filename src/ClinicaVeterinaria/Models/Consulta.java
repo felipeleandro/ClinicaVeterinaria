@@ -3,62 +3,76 @@ package ClinicaVeterinaria.Models;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Consulta
- {
+public class Consulta {
+	private int idConsulta;
 	private Date datCon;
 	private String historico;
 	private Tratamento tratamento;
 	private Veterinario veterinario;
 	private ArrayList<Exame> listaExames;
 
-	 public Consulta() {
-		 listaExames = new ArrayList<>();
-	 }
+	public Consulta() {
+		listaExames = new ArrayList<>();
+	}
 
-	 public Consulta(Date datCon, String historico)
-	{
+	public Consulta(int idConsulta, Date datCon, String historico) {
+		this.idConsulta = idConsulta;
 		this.datCon = datCon;
 		this.historico = historico;
 		listaExames = new ArrayList<>();
 	}
 
-	 public Date getDatCon() {
-		 return datCon;
-	 }
+	public Consulta(Date datCon, String historico) {
+		this.datCon = datCon;
+		this.historico = historico;
+		listaExames = new ArrayList<>();
+	}
 
-	 public void setDatCon(Date datCon) {
-		 this.datCon = datCon;
-	 }
+	public int getIdConsulta() {
+		return idConsulta;
+	}
 
-	 public String getHistorico() {
-		 return historico;
-	 }
+	public void setIdConsulta(int idConsulta) {
+		this.idConsulta = idConsulta;
+	}
 
-	 public void setHistorico(String historico) {
-		 this.historico = historico;
-	 }
+	public Date getDatCon() {
+		return datCon;
+	}
 
-	 public Tratamento getTratamento() {
-		 return tratamento;
-	 }
+	public void setDatCon(Date datCon) {
+		this.datCon = datCon;
+	}
 
-	 public void setTratamento(Tratamento tratamento) {
-		 this.tratamento = tratamento;
-	 }
+	public String getHistorico() {
+		return historico;
+	}
 
-	 public Veterinario getVeterinario() {
-		 return veterinario;
-	 }
+	public void setHistorico(String historico) {
+		this.historico = historico;
+	}
 
-	 public void setVeterinario(Veterinario veterinario) {
-		 this.veterinario = veterinario;
-	 }
+	public Tratamento getTratamento() {
+		return tratamento;
+	}
 
-	 public ArrayList<Exame> getListaExames() {
-		 return listaExames;
-	 }
+	public void setTratamento(Tratamento tratamento) {
+		this.tratamento = tratamento;
+	}
 
-	 public void setListaExames(ArrayList<Exame> listaExames) {
-		 this.listaExames = listaExames;
-	 }
- }
+	public Veterinario getVeterinario() {
+		return veterinario;
+	}
+
+	public void setVeterinario(Veterinario veterinario) {
+		this.veterinario = veterinario;
+	}
+
+	public ArrayList<Exame> getListaExames() {
+		return listaExames;
+	}
+
+	public void setListaExames(ArrayList<Exame> listaExames) {
+		this.listaExames = listaExames;
+	}
+}

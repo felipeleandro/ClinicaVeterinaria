@@ -1,17 +1,18 @@
-package ClinicaVeterinaria.View;
+package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
 import ClinicaVeterinaria.Models.Animal;
+import ClinicaVeterinaria.Models.Cliente;
 import ClinicaVeterinaria.Models.Especie;
 import ClinicaVeterinaria.Models.SexoAnimal;
 import ClinicaVeterinaria.Models.Tratamento;
 
 
-public class AnimalTableModel extends GenericTableModel{
+public class ClienteAnimalTableModel extends GenericTableModel{
 
-	public AnimalTableModel(ArrayList vDados) {
-		super(vDados, new String[] { "Nome", "Idade", "Gênero", "Espécie"});
+	public ClienteAnimalTableModel(ArrayList vDados) {
+		super(vDados, new String[] { "Nome Cliente", "Nome Animal", "Idade Animal", "Gênero Animal", "Espécie Animal"});
 	}
 
 	 @Override
@@ -26,24 +27,26 @@ public class AnimalTableModel extends GenericTableModel{
 	            case 3:
 	                return String.class;
 	            case 4:
-	                return String.class;
+	                return String.class;	            
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
 	    }
 	 @Override
 	    public Object getValueAt(int rowIndex, int columnIndex) {
-	        Animal animal = (Animal) vDados.get(rowIndex);
+	        Cliente cliente = (Cliente) vDados.get(rowIndex);
 
 	        switch (columnIndex) {
 	            case 0:
-	                return animal.getNomeAnimal();
+	                return cliente.getNomCli();
 	            case 1:
-	                return animal.getIdadeAnimal();
+	                return cliente.getListaAnimais().get(rowIndex).getNomeAnimal();
 	            case 2:
-	                return animal.getSexoAnimal();
+	            	return cliente.getListaAnimais().get(rowIndex).getIdadeAnimal();
 	            case 3:
-	                return animal.getEspecie();	            
+	            	return cliente.getListaAnimais().get(rowIndex).getSexoAnimal();
+	            case 4:
+	            	return cliente.getListaAnimais().get(rowIndex).getEspecie().getNomEsp();	            
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
