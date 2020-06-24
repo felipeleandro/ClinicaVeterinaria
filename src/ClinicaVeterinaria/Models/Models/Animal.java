@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.Models;
 
 import java.util.ArrayList;
 
@@ -8,32 +8,32 @@ public class Animal {
     private int idadeAnimal;
     private SexoAnimal sexoAnimal;
     private Especie especie;
-    private int idCliente;
+    private Cliente cliente;
     private ArrayList<Tratamento> listaTratamentos;    
 
 	public Animal() {
         listaTratamentos = new ArrayList<>();
     }
 
-    public Animal(int idAnimal, String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, int idCliente) {
+    public Animal(int idAnimal, String nomeAnimal, int idadeAnimal, SexoAnimal sexoAnimal, Especie especie, Cliente cliente) {
         this.idAnimal = idAnimal;
     	this.nomeAnimal = nomeAnimal;
         this.idadeAnimal = idadeAnimal;
         this.sexoAnimal = sexoAnimal;
         this.especie = especie;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         listaTratamentos = new ArrayList<>();
     }
 
-    public int getIdCliente() {
-		return idCliente;
+    public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-    public ArrayList<Tratamento> getListaTratamentos() {
+	public ArrayList<Tratamento> getListaTratamentos() {
         return listaTratamentos;
     }
 
@@ -85,6 +85,6 @@ public class Animal {
     public String toString() {
         return "Nome: " + nomeAnimal + " "  +
                "Idade: " + idadeAnimal + " " +
-               "EspÃ©cie: " + especie;
+               "Espécie: " + especie.getNomEsp();
     }
 }

@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
-import ClinicaVeterinaria.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.Cliente;
 import ClinicaVeterinaria.View.Principal.TelaPrincipal;
 import ClinicaVeterinaria.View.TableModels.ClienteAnimalTableModel;
 
@@ -45,7 +45,8 @@ public class TelaClienteAnimal extends javax.swing.JFrame {
 		jPane1.add(scrollPane);
 		
 		table = new JTable();
-		table.setEnabled(false);
+		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(true);
 		
 		table.setModel(new ClienteAnimalTableModel((ArrayList<Cliente>) Controller.getAllClientesAnimals()));
 		scrollPane.setViewportView(table);

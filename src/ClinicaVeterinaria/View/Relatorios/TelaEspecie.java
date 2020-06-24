@@ -17,15 +17,23 @@ import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
 import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.Veterinario;
 import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarAnimal;
+import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarEspecie;
+import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarVeterinario;
+import ClinicaVeterinaria.View.Cadastros.TelaNovaEspecie;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoAnimal;
+import ClinicaVeterinaria.View.Cadastros.TelaNovoVeterinario;
 import ClinicaVeterinaria.View.Principal.TelaPrincipal;
 import ClinicaVeterinaria.View.TableModels.AnimalTableModel;
+import ClinicaVeterinaria.View.TableModels.EspecieTableModel;
+import ClinicaVeterinaria.View.TableModels.VeterinarioTableModel;
 
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class TelaAnimal extends javax.swing.JFrame {
+public class TelaEspecie extends javax.swing.JFrame {
 
 	private JPanel jPane1;
 	private JTable table;
@@ -33,8 +41,8 @@ public class TelaAnimal extends javax.swing.JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAnimal() {
-		setTitle("Lista de Animais");
+	public TelaEspecie() {
+		setTitle("Lista de Esp\u00E9cies");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 544, 350);
 		jPane1 = new JPanel();
@@ -43,73 +51,67 @@ public class TelaAnimal extends javax.swing.JFrame {
 		jPane1.setLayout(null);
 
 		JLabel jLabel = new JLabel();
-		jLabel.setText("Lista de Animais");
-		jLabel.setBounds(211, 10, 86, 14);
+		jLabel.setText("Lista de Esp\u00E9cies");
+		jLabel.setBounds(211, 10, 183, 14);
 		jPane1.add(jLabel);
 
-		JButton btnNovoAnimal = new JButton();
-		btnNovoAnimal.addActionListener(new ActionListener() {
+		JButton btnNovoVeterinario = new JButton();
+		btnNovoVeterinario.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
 		});
-		btnNovoAnimal.setText("Novo Animal");
-		btnNovoAnimal.setBounds(10, 42, 125, 23);
-		jPane1.add(btnNovoAnimal);
+		btnNovoVeterinario.setText("Nova Esp\u00E9cie");
+		btnNovoVeterinario.setBounds(10, 42, 135, 23);
+		jPane1.add(btnNovoVeterinario);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 91, 510, 194);
+		scrollPane.setBounds(10, 75, 510, 228);
 		jPane1.add(scrollPane);
 
 		table = new JTable();
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
-		table.setModel(new AnimalTableModel((ArrayList<Animal>) Controller.getAllAnimais()));
+		table.setModel(new EspecieTableModel((ArrayList<Especie>) Controller.getAllEspecies()));
 		scrollPane.setViewportView(table);
 
-		JButton btnNewButton = new JButton("Atualizar Animal");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAtualizarVeterinario = new JButton("Atualizar Esp\u00E9cie");
+		btnAtualizarVeterinario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (table.getSelectedRow() == -1) {
 					JOptionPane.showMessageDialog(null, "Selecione um registro para continuar.");
 				} else {
 
-					TelaAtualizarAnimal obj = new TelaAtualizarAnimal();
+					TelaAtualizarEspecie obj = new TelaAtualizarEspecie();
 					
-					obj.txtNome.setText(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
-					obj.txtNomeEspecie.setText(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
-					obj.txtIdade.setText(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
-					obj.txtSexo.setText(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());					
-					obj.txtIdAnimal.setText(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
-					
-					String nomeCliente = Controller.getClienteById(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 5).toString())).getNomCli();
-					obj.txtNomeCliente.setText(nomeCliente);										
+					obj.txtIdEspecie.setText(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+					obj.txtNome.setText(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
 					
 					obj.setVisible(true);
 
 					obj.addWindowListener(new WindowAdapter() {
 						@Override
 						public void windowClosed(WindowEvent e) {
-							table.setModel(new AnimalTableModel((ArrayList<Animal>) Controller.getAllAnimais()));
+							table.setModel(new EspecieTableModel((ArrayList<Especie>) Controller.getAllEspecies()));
 						}
 
 					});
 				}
 			}
 		});
-		btnNewButton.setBounds(143, 42, 125, 23);
-		jPane1.add(btnNewButton);
+		btnAtualizarVeterinario.setBounds(155, 42, 135, 23);
+		jPane1.add(btnAtualizarVeterinario);
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		TelaNovoAnimal obj = new TelaNovoAnimal();
+		TelaNovaEspecie obj = new TelaNovaEspecie();
 		obj.setVisible(true);
 
 		obj.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				table.setModel(new AnimalTableModel((ArrayList<Animal>) Controller.getAllAnimais()));
+				table.setModel(new EspecieTableModel((ArrayList<Especie>) Controller.getAllEspecies()));
 			}
 
 		});
@@ -144,7 +146,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				TelaAnimal frame = new TelaAnimal();
+				TelaEspecie frame = new TelaEspecie();
 				frame.setVisible(true);
 			}
 		});

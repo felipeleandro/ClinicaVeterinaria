@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.Models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,11 +23,14 @@ public class DB {
 				statement = conn.createStatement();
 
 				if (APAGAR_DADOS) {
-					statement.execute("DELETE FROM Animais");
-					statement.execute("DELETE FROM Clientes");
 					
-					statement.execute("DROP TABLE Animais");
-					statement.execute("DROP TABLE Clientes");
+					statement.execute("DROP TABLE Tratamentos CASCADE");
+					statement.execute("DROP TABLE Consultas CASCADE");
+					statement.execute("DROP TABLE Exames CASCADE");
+					statement.execute("DROP TABLE Veterinarios CASCADE");
+					statement.execute("DROP TABLE Especies CASCADE");
+					statement.execute("DROP TABLE Animais CASCADE");
+					statement.execute("DROP TABLE Clientes CASCADE");
 				}
 
 				statement.execute(
@@ -35,13 +38,13 @@ public class DB {
 				statement.execute(
 						"CREATE TABLE IF NOT EXISTS Especies(idEspecie SERIAL PRIMARY KEY, nomeEspecie VARCHAR(100))");
 				statement.execute(
-						"CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal VARCHAR(1), idEspecie INTEGER, nomeEspecie VARCHAR(100), idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente))");				
+						"CREATE TABLE IF NOT EXISTS Animais(idAnimal SERIAL PRIMARY KEY, nomeAnimal VARCHAR(100), idadeAnimal INTEGER, sexoAnimal VARCHAR(1), idEspecie INTEGER, idCliente INTEGER, FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente), FOREIGN KEY(idEspecie) REFERENCES Especies(idEspecie))");				
 				statement.execute(
 						"CREATE TABLE IF NOT EXISTS Veterinarios(idVeterinario SERIAL PRIMARY KEY, nomeVeterinario VARCHAR(100), enderecoVeterinario VARCHAR(100), telefoneVeterinario VARCHAR(15))");
 				statement.execute(
-						"CREATE TABLE IF NOT EXISTS Tratamentos(idTratamento SERIAL PRIMARY KEY, dataInicial TIMESTAMP, dataFinal TIMESTAMP)");
+						"CREATE TABLE IF NOT EXISTS Tratamentos(idTratamento SERIAL PRIMARY KEY, dataInicial TIMESTAMP, dataFinal TIMESTAMP, idAnimal INTEGER, FOREIGN KEY(idAnimal) REFERENCES Animais(idAnimal))");
 				statement.execute(
-						"CREATE TABLE IF NOT EXISTS Consultas(idConsulta SERIAL PRIMARY KEY, dataConsulta TIMESTAMP, historicoConsulta VARCHAR(200), idTratamento INTEGER, idVeterinario INTEGER, FOREIGN KEY(idTratamento) REFERENCES Tratamentos(idTratamento), FOREIGN KEY(idVeterinario) REFERENCES Veterinarios(idVeterinario))");
+						"CREATE TABLE IF NOT EXISTS Consultas(idConsulta SERIAL PRIMARY KEY, dataConsulta TIMESTAMP, idVeterinario INTEGER, historicoConsulta VARCHAR(1000), idTratamento INTEGER, FOREIGN KEY(idTratamento) REFERENCES Tratamentos(idTratamento), FOREIGN KEY(idVeterinario) REFERENCES Veterinarios(idVeterinario))");
 				statement.execute(
 						"CREATE TABLE IF NOT EXISTS Exames(idExame SERIAL PRIMARY KEY, descricaoExame VARCHAR(100), idConsulta INTEGER, FOREIGN KEY(idConsulta) REFERENCES Consultas(idConsulta))");
 

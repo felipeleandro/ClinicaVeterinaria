@@ -2,10 +2,10 @@ package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Especie;
-import ClinicaVeterinaria.Models.SexoAnimal;
-import ClinicaVeterinaria.Models.Tratamento;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.SexoAnimal;
+import ClinicaVeterinaria.Models.Models.Tratamento;
 
 
 public class AnimalTableModel extends GenericTableModel{
@@ -47,7 +47,7 @@ public class AnimalTableModel extends GenericTableModel{
 	            case 4:
 	                return animal.getIdAnimal();
 	            case 5:
-	                return animal.getIdCliente();
+	                return animal.getCliente().getidCli();
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }
@@ -61,7 +61,7 @@ public class AnimalTableModel extends GenericTableModel{
 	                animal.setNomeAnimal((String) aValue);
 	                break;
 	            case 1:
-	            	animal.setEspecie((Especie) aValue);	                
+	            	animal.getEspecie().setNomEsp((String) aValue);	                
 	                break;
 	            case 2:
 	            	animal.setIdadeAnimal((int) aValue);	                

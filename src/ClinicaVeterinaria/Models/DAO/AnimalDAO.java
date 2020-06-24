@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.DB;
-import ClinicaVeterinaria.Models.Especie;
-import ClinicaVeterinaria.Models.SexoAnimal;
+import ClinicaVeterinaria.Controller.Controller;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.DB;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.SexoAnimal;
 
 public class AnimalDAO {
 	private static AnimalDAO instance;
@@ -37,14 +38,13 @@ public class AnimalDAO {
 		try {
 			conn = DB.getConnection();
 			statement = conn.prepareStatement(
-					"INSERT INTO Animais(nomeAnimal, idadeAnimal, sexoAnimal, idEspecie, nomeEspecie, idCliente) VALUES(?,?,?,?,?,?)",
+					"INSERT INTO Animais(nomeAnimal, idadeAnimal, sexoAnimal, idEspecie, idCliente) VALUES(?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, nomeAnimal);
 			statement.setInt(2, idadeAnimal);
 			statement.setString(3, sexoAnimal.getSexo());
 			statement.setInt(4, especie.getIdEspecie());
-			statement.setString(5, especie.getNomEsp());
-			statement.setInt(6, idCliente);
+			statement.setInt(5, idCliente);
 
 			statement.executeUpdate();
 
@@ -52,7 +52,6 @@ public class AnimalDAO {
 
 			if (rs.next())
 				idAnimal = rs.getInt(1);
-			return idAnimal;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,6 +80,7 @@ public class AnimalDAO {
 			while (rs.next()) {
 				result.add(buildObject(rs));
 			}
+			
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,7 +125,8 @@ public class AnimalDAO {
 
 			rs = statement.executeQuery();
 
-			result = buildObject(rs);
+			if (rs.next())
+            	result = buildObject(rs);
 
 			rs.close();
 		} catch (SQLException e) {
@@ -148,7 +149,8 @@ public class AnimalDAO {
 
 			rs = statement.executeQuery();
 
-			result = buildObject(rs);
+			if (rs.next())
+            	result = buildObject(rs);
 
 			rs.close();
 		} catch (SQLException e) {
@@ -169,7 +171,6 @@ public class AnimalDAO {
 											+ "idadeAnimal = ?,"
 											+ "sexoAnimal = ?," 
 											+ "idEspecie = ?,"
-											+ "nomeEspecie = ?,"
 											+ "idCliente = ?"
 											+ "WHERE idAnimal = ?");
 
@@ -177,9 +178,8 @@ public class AnimalDAO {
 			statement.setInt(2, idadeAnimal);
 			statement.setString(3, sexoAnimal.getSexo());
 			statement.setInt(4, especieAnimal.getIdEspecie());
-			statement.setString(5, especieAnimal.getNomEsp());
-			statement.setInt(6, idCliente);
-			statement.setInt(7, idAnimal);
+			statement.setInt(5, idCliente);
+			statement.setInt(6, idAnimal);
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -207,11 +207,12 @@ public class AnimalDAO {
 		
 		try {
 			int idEspecie = rs.getInt("idEspecie");
-			String nomeEspecie = rs.getString("nomeEspecie");
-			SexoAnimal sexoAnimal = SexoAnimal.fromSexo(rs.getString("sexoAnimal"));
-			Especie especie = new Especie(idEspecie, nomeEspecie);
 			
-			animal = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getInt("idadeAnimal"), sexoAnimal, especie, rs.getInt("idCliente"));
+			SexoAnimal sexoAnimal = SexoAnimal.fromSexo(rs.getString("sexoAnimal"));
+			Especie especie = Controller.getEspecieByIdEspecie(idEspecie);
+			Cliente cliente = Controller.getClienteById(rs.getInt("idCliente"));
+			
+			animal = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getInt("idadeAnimal"), sexoAnimal, especie, cliente);
 		} catch (SQLException e) { 
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.Models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,16 +15,12 @@ public class Consulta {
 		listaExames = new ArrayList<>();
 	}
 
-	public Consulta(int idConsulta, Date datCon, String historico) {
+	public Consulta(int idConsulta, Date datCon, String historico, Tratamento tratamento, Veterinario veterinario) {
 		this.idConsulta = idConsulta;
 		this.datCon = datCon;
 		this.historico = historico;
-		listaExames = new ArrayList<>();
-	}
-
-	public Consulta(Date datCon, String historico) {
-		this.datCon = datCon;
-		this.historico = historico;
+		this.tratamento = tratamento;
+		this.veterinario = veterinario;
 		listaExames = new ArrayList<>();
 	}
 
@@ -72,7 +68,7 @@ public class Consulta {
 		return listaExames;
 	}
 
-	public void setListaExames(ArrayList<Exame> listaExames) {
-		this.listaExames = listaExames;
+	public void addListaExames(Exame exame) {
+		this.listaExames.add(exame);
 	}
 }

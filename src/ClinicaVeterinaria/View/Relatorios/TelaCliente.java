@@ -17,8 +17,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Cliente;
 import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarAnimal;
 import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarCliente;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoCliente;

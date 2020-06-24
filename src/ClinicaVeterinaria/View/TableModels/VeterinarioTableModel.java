@@ -2,11 +2,11 @@ package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Especie;
-import ClinicaVeterinaria.Models.SexoAnimal;
-import ClinicaVeterinaria.Models.Tratamento;
-import ClinicaVeterinaria.Models.Veterinario;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.SexoAnimal;
+import ClinicaVeterinaria.Models.Models.Tratamento;
+import ClinicaVeterinaria.Models.Models.Veterinario;
 
 
 public class VeterinarioTableModel extends GenericTableModel{
@@ -43,7 +43,6 @@ public class VeterinarioTableModel extends GenericTableModel{
 	            	return veterinario.getTelVet();                
 	            case 3:
 	            	return veterinario.getIdVeterinario();
-	            	            
 	            default:
 	                throw new IndexOutOfBoundsException("columnIndex out of bounds");
 	        }

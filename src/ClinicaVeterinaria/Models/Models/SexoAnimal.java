@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.Models;
+package ClinicaVeterinaria.Models.Models;
 
 public enum SexoAnimal {
 	Macho("M"), Fêmea("F");

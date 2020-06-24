@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import ClinicaVeterinaria.Controller.Controller;
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Cliente;
-import ClinicaVeterinaria.Models.DB;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.DB;
 
 public class ClienteDAO {
     private static ClienteDAO instance;
@@ -52,8 +51,6 @@ public class ClienteDAO {
             
             if (rs.next())
             	idCliente = rs.getInt(1);
-            
-            return idCliente;
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,7 +95,7 @@ public class ClienteDAO {
             conn = DB.getConnection();
             statement = conn.prepareStatement("SELECT C.idCliente, C.nomCli, C.endCli, C.telCli, C.cepCli, C.emailCli "            								
             								+ "FROM Clientes C "
-            								+ "INNER JOIN Animais A ON C.idCliente = A.idCliente"
+            								+ "INNER JOIN Animais A ON C.idCliente = A.idCliente "
             								+ "ORDER BY idCliente, idAnimal");
 
             rs = statement.executeQuery();
@@ -125,8 +122,11 @@ public class ClienteDAO {
             conn = DB.getConnection();
             statement = conn.prepareStatement("SELECT * FROM Clientes WHERE nomCli = ? ORDER BY idCliente");
             statement.setString(1, nomeCliente);
-
+            
             rs = statement.executeQuery();
+
+            if (rs.next())
+            	result = buildObject(rs);
             
             result = buildObject(rs);
             
@@ -162,7 +162,6 @@ public class ClienteDAO {
         return result;
     }
 
-    // Update
     public void updateCliente(int idCliente, String nomCli, String endCli, String telCli, String cepCli, String emailCli) {
     	Connection conn = null;
         PreparedStatement statement = null;
@@ -190,7 +189,6 @@ public class ClienteDAO {
         }
     }
 
-    // Delete
     public void deleteClienteByIdCliente(int idCliente) {
         Connection conn = null;
         PreparedStatement statement = null;
@@ -221,6 +219,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         return cliente;
     }
     

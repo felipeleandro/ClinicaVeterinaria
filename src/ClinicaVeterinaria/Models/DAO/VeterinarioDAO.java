@@ -7,10 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-import ClinicaVeterinaria.Models.DB;
-import ClinicaVeterinaria.Models.Veterinario;
+import ClinicaVeterinaria.Models.Models.DB;
+import ClinicaVeterinaria.Models.Models.Veterinario;
 
 public class VeterinarioDAO {
 	private static VeterinarioDAO instance;
@@ -51,7 +50,6 @@ public class VeterinarioDAO {
 			if (rs.next())
 				idVeterinario = rs.getInt(1);
 			
-			return idVeterinario;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -97,8 +95,9 @@ public class VeterinarioDAO {
 
 			rs = statement.executeQuery();
 
-			result = buildObject(rs);
-
+			if (rs.next())
+            	result = buildObject(rs);
+			
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -119,8 +118,9 @@ public class VeterinarioDAO {
 			statement.setString(1, nomeVeterinario);
 
 			rs = statement.executeQuery();
-
-			result = buildObject(rs);
+			
+			if (rs.next())
+            	result = buildObject(rs);
 
 			rs.close();
 		} catch (SQLException e) {

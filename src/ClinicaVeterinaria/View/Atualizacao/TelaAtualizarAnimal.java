@@ -1,4 +1,4 @@
-package ClinicaVeterinaria.View.Atualizacao;
+	package ClinicaVeterinaria.View.Atualizacao;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,17 +13,17 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
-import ClinicaVeterinaria.Models.Especie;
-import ClinicaVeterinaria.Models.SexoAnimal;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.SexoAnimal;
 
 public class TelaAtualizarAnimal extends JFrame {
 
 	private JPanel contentPane;
 	public JTextField txtNome;
-	public JTextField txtEspecie;
+	public JTextField txtNomeEspecie;
 	public JTextField txtIdade;
 	public JTextField txtSexo;
-	public JTextField txtIdCliente;
+	public JTextField txtNomeCliente;
 	public JTextField txtIdAnimal;
 
 	/**
@@ -69,11 +69,11 @@ public class TelaAtualizarAnimal extends JFrame {
 		lblNome.setBounds(20, 39, 96, 13);
 		contentPane.add(lblNome);
 		
-		txtEspecie = new JTextField();
-		txtEspecie.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtEspecie.setColumns(10);
-		txtEspecie.setBounds(20, 100, 96, 22);
-		contentPane.add(txtEspecie);
+		txtNomeEspecie = new JTextField();
+		txtNomeEspecie.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtNomeEspecie.setColumns(10);
+		txtNomeEspecie.setBounds(20, 100, 96, 22);
+		contentPane.add(txtNomeEspecie);
 		
 		JLabel lblEspcie = new JLabel("Esp\u00E9cie");
 		lblEspcie.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -102,16 +102,16 @@ public class TelaAtualizarAnimal extends JFrame {
 		lblSexo.setBounds(20, 165, 96, 13);
 		contentPane.add(lblSexo);
 		
-		JLabel lblIdDoCliente = new JLabel("Id do Cliente");
-		lblIdDoCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblIdDoCliente.setBounds(20, 205, 96, 13);
-		contentPane.add(lblIdDoCliente);
+		JLabel lblNomeDoCliente = new JLabel("Nome do Cliente");
+		lblNomeDoCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblNomeDoCliente.setBounds(20, 205, 96, 13);
+		contentPane.add(lblNomeDoCliente);
 		
-		txtIdCliente = new JTextField();
-		txtIdCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		txtIdCliente.setColumns(10);
-		txtIdCliente.setBounds(20, 220, 96, 22);
-		contentPane.add(txtIdCliente);
+		txtNomeCliente = new JTextField();
+		txtNomeCliente.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		txtNomeCliente.setColumns(10);
+		txtNomeCliente.setBounds(20, 220, 96, 22);
+		contentPane.add(txtNomeCliente);
 		
 		JButton btnSalvarAnimal = new JButton("Gravar");
 		btnSalvarAnimal.addActionListener(new ActionListener() {
@@ -119,13 +119,11 @@ public class TelaAtualizarAnimal extends JFrame {
 				
 				int idAnimal = Integer.parseInt(txtIdAnimal.getText());				
 				String nomeAnimal = txtNome.getText();
-				String nomeEspecie = txtEspecie.getText();
-				int idadeAnimal = Integer.parseInt(txtIdade.getText());			
-				
-				int idCliente = Integer.parseInt(txtIdCliente.getText());				
+				int idadeAnimal = Integer.parseInt(txtIdade.getText());
+				int idCliente = Controller.getClienteByNome(txtNomeCliente.getText()).getidCli();				
 				
 				SexoAnimal sexoAnimalClasse = SexoAnimal.fromSexo(txtSexo.getText());
-				Especie especie = new Especie(1, nomeEspecie);				
+				Especie especie = Controller.getEspecieByNome(txtNomeEspecie.getText());				
 				
 				Controller.updateAnimal(idAnimal, nomeAnimal, idadeAnimal, sexoAnimalClasse, especie, idCliente);
 				

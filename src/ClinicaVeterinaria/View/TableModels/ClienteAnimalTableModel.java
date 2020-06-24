@@ -2,11 +2,11 @@ package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
-import ClinicaVeterinaria.Models.Animal;
-import ClinicaVeterinaria.Models.Cliente;
-import ClinicaVeterinaria.Models.Especie;
-import ClinicaVeterinaria.Models.SexoAnimal;
-import ClinicaVeterinaria.Models.Tratamento;
+import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.Especie;
+import ClinicaVeterinaria.Models.Models.SexoAnimal;
+import ClinicaVeterinaria.Models.Models.Tratamento;
 
 
 public class ClienteAnimalTableModel extends GenericTableModel{
@@ -77,7 +77,7 @@ public class ClienteAnimalTableModel extends GenericTableModel{
 	 }
 	        @Override
 	        public boolean isCellEditable(int rowIndex, int columnIndex) {
-	            return true;
+	            return false;
 	        }
 
 }

@@ -2,7 +2,7 @@ package ClinicaVeterinaria.View.TableModels;
 
 import java.util.ArrayList;
 
-import ClinicaVeterinaria.Models.Cliente;
+import ClinicaVeterinaria.Models.Models.Cliente;
 
 public class ClienteTableModel extends GenericTableModel {
 

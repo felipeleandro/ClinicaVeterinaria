@@ -140,8 +140,8 @@ public class TelaSobre extends JFrame {
 		lblNewLabel_3_5.setBounds(217, 173, 84, 13);
 		contentPane.add(lblNewLabel_3_5);
 		
-		JLabel lblNewLabel_4 = new JLabel("Disciplina de Engenharia de Software II - Professor: Plinio Vilela");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel lblNewLabel_4 = new JLabel("Disciplina de Programa\u00E7\u00E3o Orientada a Objetos - Professores: Plinio Vilela/Ulisses Martins");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_4.setBounds(26, 288, 590, 20);
 		contentPane.add(lblNewLabel_4);
 	}

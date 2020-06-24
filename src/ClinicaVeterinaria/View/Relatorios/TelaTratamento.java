@@ -17,19 +17,26 @@ import javax.swing.border.EmptyBorder;
 
 import ClinicaVeterinaria.Controller.Controller;
 import ClinicaVeterinaria.Models.Models.Animal;
+import ClinicaVeterinaria.Models.Models.Consulta;
+import ClinicaVeterinaria.Models.Models.Tratamento;
 import ClinicaVeterinaria.Models.Models.Veterinario;
 import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarAnimal;
 import ClinicaVeterinaria.View.Atualizacao.TelaAtualizarVeterinario;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoAnimal;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoVeterinario;
 import ClinicaVeterinaria.View.Principal.TelaPrincipal;
+import ClinicaVeterinaria.View.Processos.TelaAtualizarTratamento;
+import ClinicaVeterinaria.View.Processos.TelaMarcarConsulta;
+import ClinicaVeterinaria.View.Processos.TelaNovoTratamento;
 import ClinicaVeterinaria.View.TableModels.AnimalTableModel;
+import ClinicaVeterinaria.View.TableModels.ConsultaTableModel;
+import ClinicaVeterinaria.View.TableModels.TratamentoTableModel;
 import ClinicaVeterinaria.View.TableModels.VeterinarioTableModel;
 
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class TelaVeterinario extends javax.swing.JFrame {
+public class TelaTratamento extends javax.swing.JFrame {
 
 	private JPanel jPane1;
 	private JTable table;
@@ -37,8 +44,8 @@ public class TelaVeterinario extends javax.swing.JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaVeterinario() {
-		setTitle("Lista de Veterin\u00E1rios");
+	public TelaTratamento() {
+		setTitle("Lista de Tratamentos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 544, 350);
 		jPane1 = new JPanel();
@@ -47,19 +54,19 @@ public class TelaVeterinario extends javax.swing.JFrame {
 		jPane1.setLayout(null);
 
 		JLabel jLabel = new JLabel();
-		jLabel.setText("Lista de Veterin\u00E1rios");
+		jLabel.setText("Lista de Tratamentos");
 		jLabel.setBounds(211, 10, 183, 14);
 		jPane1.add(jLabel);
 
-		JButton btnNovoVeterinario = new JButton();
-		btnNovoVeterinario.addActionListener(new ActionListener() {
+		JButton btnMarcarConsulta = new JButton();
+		btnMarcarConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
+				btnMarcarConsultaActionPerformed(evt);
 			}
 		});
-		btnNovoVeterinario.setText("Novo Veterin\u00E1rio");
-		btnNovoVeterinario.setBounds(10, 42, 135, 23);
-		jPane1.add(btnNovoVeterinario);
+		btnMarcarConsulta.setText("Marcar Consulta");
+		btnMarcarConsulta.setBounds(310, 43, 140, 23);
+		jPane1.add(btnMarcarConsulta);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 75, 510, 228);
@@ -68,52 +75,75 @@ public class TelaVeterinario extends javax.swing.JFrame {
 		table = new JTable();
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
-		table.setModel(new VeterinarioTableModel((ArrayList<Veterinario>) Controller.getAllVeterinarios()));
+		table.setModel(new TratamentoTableModel((ArrayList<Tratamento>) Controller.getAllTratamentos()));
 		scrollPane.setViewportView(table);
 
-		JButton btnAtualizarVeterinario = new JButton("Atualizar Veterin\u00E1rio");
-		btnAtualizarVeterinario.addActionListener(new ActionListener() {
+		JButton btnAtualizarTratamento = new JButton("Atualizar Tratamento");
+		btnAtualizarTratamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (table.getSelectedRow() == -1) {
 					JOptionPane.showMessageDialog(null, "Selecione um registro para continuar.");
 				} else {
 
-					TelaAtualizarVeterinario obj = new TelaAtualizarVeterinario();
-					
-					obj.txtIdVeterinario.setText(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
-					obj.txtNome.setText(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
-					obj.txtEndereco.setText(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
-					obj.txtTelefone.setText(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
-					
+					TelaAtualizarTratamento obj = new TelaAtualizarTratamento();
+
+					obj.txtIdTratamento.setEnabled(false);
+
+					obj.txtIdTratamento.setText(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+					obj.txtDataInicial.setText(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
+					obj.txtDataFinal.setText(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
+
 					obj.setVisible(true);
 
 					obj.addWindowListener(new WindowAdapter() {
 						@Override
 						public void windowClosed(WindowEvent e) {
-							table.setModel(new VeterinarioTableModel((ArrayList<Veterinario>) Controller.getAllVeterinarios()));
+							table.setModel(
+									new TratamentoTableModel((ArrayList<Tratamento>) Controller.getAllTratamentos()));
 						}
 
 					});
 				}
 			}
 		});
-		btnAtualizarVeterinario.setBounds(155, 42, 135, 23);
-		jPane1.add(btnAtualizarVeterinario);
+		btnAtualizarTratamento.setBounds(160, 43, 140, 23);
+		jPane1.add(btnAtualizarTratamento);
+
+		JButton btnNovoTratamento = new JButton("Novo Tratamento");
+		btnNovoTratamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovoTratamento obj = new TelaNovoTratamento();
+				obj.setVisible(true);
+
+				obj.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosed(WindowEvent e) {
+						table.setModel(
+								new TratamentoTableModel((ArrayList<Tratamento>) Controller.getAllTratamentos()));
+					}
+
+				});
+
+			}
+		});
+		btnNovoTratamento.setBounds(10, 43, 140, 23);
+		jPane1.add(btnNovoTratamento);
 	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		TelaNovoVeterinario obj = new TelaNovoVeterinario();
-		obj.setVisible(true);
+	private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {
+		
 
-		obj.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				table.setModel(new VeterinarioTableModel((ArrayList<Veterinario>) Controller.getAllVeterinarios()));
-			}
+		if (table.getSelectedRow() == -1) {
+			JOptionPane.showMessageDialog(null, "Selecione um registro para continuar.");
+		} else {
+			TelaMarcarConsulta obj = new TelaMarcarConsulta();
+			
+			obj.txtIdTratamento.setText(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+			obj.txtIdTratamento.setEnabled(false);
 
-		});
-
+			obj.setVisible(true);
+		}
 	}
 
 	/**
@@ -144,7 +174,7 @@ public class TelaVeterinario extends javax.swing.JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				TelaVeterinario frame = new TelaVeterinario();
+				TelaTratamento frame = new TelaTratamento();
 				frame.setVisible(true);
 			}
 		});

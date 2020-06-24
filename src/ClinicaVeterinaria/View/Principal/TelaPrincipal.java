@@ -11,14 +11,22 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import ClinicaVeterinaria.Models.DB;
+import ClinicaVeterinaria.Models.Models.DB;
+import ClinicaVeterinaria.View.Cadastros.TelaNovaEspecie;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoAnimal;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoCliente;
 import ClinicaVeterinaria.View.Cadastros.TelaNovoVeterinario;
 import ClinicaVeterinaria.View.Diversos.TelaSobre;
+import ClinicaVeterinaria.View.Processos.TelaMarcarConsulta;
+import ClinicaVeterinaria.View.Processos.TelaMarcarExame;
+import ClinicaVeterinaria.View.Processos.TelaNovoTratamento;
 import ClinicaVeterinaria.View.Relatorios.TelaAnimal;
 import ClinicaVeterinaria.View.Relatorios.TelaCliente;
 import ClinicaVeterinaria.View.Relatorios.TelaClienteAnimal;
+import ClinicaVeterinaria.View.Relatorios.TelaConsulta;
+import ClinicaVeterinaria.View.Relatorios.TelaEspecie;
+import ClinicaVeterinaria.View.Relatorios.TelaExame;
+import ClinicaVeterinaria.View.Relatorios.TelaTratamento;
 import ClinicaVeterinaria.View.Relatorios.TelaVeterinario;
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -31,86 +39,167 @@ public class TelaPrincipal extends javax.swing.JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu_1 = new JMenu("Cadastros");
-		menuBar.add(mnNewMenu_1);
+		JMenu mainMenuCadastros = new JMenu("Cadastros");
+		menuBar.add(mainMenuCadastros);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Cliente");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		JMenuItem menuNovoCliente = new JMenuItem("Cliente");
+		menuNovoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaNovoCliente obj = new TelaNovoCliente();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_2);
+		mainMenuCadastros.add(menuNovoCliente);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Animal");
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+		JMenuItem menuNovoAnimal = new JMenuItem("Animal");
+		menuNovoAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaNovoAnimal obj = new TelaNovoAnimal();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Veterin\u00E1rio");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+		JMenuItem menuNovoVeterinario = new JMenuItem("Veterin\u00E1rio");
+		menuNovoVeterinario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaNovoVeterinario obj = new TelaNovoVeterinario();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_6);
+		mainMenuCadastros.add(menuNovoVeterinario);
 		
-		JMenu mnNewMenu = new JMenu("Relat\u00F3rios");
-		menuBar.add(mnNewMenu);
+		JMenuItem menuNovaEspecie = new JMenuItem("Esp\u00E9cie");
+		menuNovaEspecie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovaEspecie obj = new TelaNovaEspecie();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuCadastros.add(menuNovaEspecie);
+		mainMenuCadastros.add(menuNovoAnimal);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Lista de Clientes");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenu mainMenuProcessos = new JMenu("Processos");
+		menuBar.add(mainMenuProcessos);
+		
+		JMenuItem menuNovoTratamento = new JMenuItem("Novo Tratamento");
+		menuNovoTratamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaNovoTratamento obj = new TelaNovoTratamento();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuProcessos.add(menuNovoTratamento);
+		
+		JMenuItem menuMarcarConsulta = new JMenuItem("Marcar Consulta");
+		menuMarcarConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMarcarConsulta obj = new TelaMarcarConsulta();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuProcessos.add(menuMarcarConsulta);
+		
+		JMenuItem menuMarcarExame = new JMenuItem("Marcar Exame");
+		menuMarcarExame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMarcarExame obj = new TelaMarcarExame();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuProcessos.add(menuMarcarExame);
+		
+		JMenu mainMenuRelatorios = new JMenu("Relat\u00F3rios");
+		menuBar.add(mainMenuRelatorios);
+		
+		JMenuItem menuRelatorioClientes = new JMenuItem("Lista de Clientes");
+		menuRelatorioClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaCliente obj = new TelaCliente();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Lista de Animais");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		JMenu menuRelatoriosCadastros = new JMenu("Cadastros");
+		mainMenuRelatorios.add(menuRelatoriosCadastros);
+		menuRelatoriosCadastros.add(menuRelatorioClientes);
+		
+		JMenuItem menuRelatorioAnimais = new JMenuItem("Lista de Animais");
+		menuRelatorioAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaAnimal obj = new TelaAnimal();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_1);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Lista de Clientes x Animais");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaClienteAnimal obj = new TelaClienteAnimal();
-				obj.setVisible(true);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_5);
-		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Lista de Veterin\u00E1rios");
-		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+		JMenuItem menuRelatorioVeterinarios = new JMenuItem("Lista de Veterin\u00E1rios");
+		menuRelatorioVeterinarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaVeterinario obj = new TelaVeterinario();
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_7);
+		menuRelatoriosCadastros.add(menuRelatorioVeterinarios);
 		
-		JMenu mnNewMenu_2 = new JMenu("Sobre");
-		menuBar.add(mnNewMenu_2);
+		JMenuItem menuRelatorioEspecies = new JMenuItem("Lista de Esp\u00E9cies");
+		menuRelatorioEspecies.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaEspecie obj = new TelaEspecie();
+				obj.setVisible(true);
+			}
+		});
+		menuRelatoriosCadastros.add(menuRelatorioEspecies);
+		menuRelatoriosCadastros.add(menuRelatorioAnimais);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Sobre");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+		JMenuItem menuRelatorioClientesAnimais = new JMenuItem("Lista de Clientes x Animais");
+		menuRelatorioClientesAnimais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaClienteAnimal obj = new TelaClienteAnimal();
+				obj.setVisible(true);
+			}
+		});
+		menuRelatoriosCadastros.add(menuRelatorioClientesAnimais);
+		
+		JMenuItem menuRelatorioTratamentos = new JMenuItem("Lista de Tratamentos");
+		menuRelatorioTratamentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaTratamento obj = new TelaTratamento();
+				obj.setVisible(true);
+			}
+		});
+		
+		JMenu mainMenuRelatoriosTratamento = new JMenu("Tratamentos");
+		mainMenuRelatorios.add(mainMenuRelatoriosTratamento);
+		mainMenuRelatoriosTratamento.add(menuRelatorioTratamentos);
+		
+		JMenuItem menuRelatorioConsultas = new JMenuItem("Lista de Consultas");
+		menuRelatorioConsultas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaConsulta obj = new TelaConsulta();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuRelatoriosTratamento.add(menuRelatorioConsultas);
+		
+		JMenuItem menuRelatorioExames = new JMenuItem("Lista de Exames");
+		menuRelatorioExames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExame obj = new TelaExame();
+				obj.setVisible(true);
+			}
+		});
+		mainMenuRelatoriosTratamento.add(menuRelatorioExames);
+		
+		JMenu mainMenuSobre = new JMenu("Sobre");
+		menuBar.add(mainMenuSobre);
+		
+		JMenuItem menuSobre = new JMenuItem("Sobre");
+		menuSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaSobre obj = new TelaSobre();				
 				obj.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_4);
+		mainMenuSobre.add(menuSobre);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
